@@ -1,6 +1,6 @@
-<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos Scotiabank 2026" data-version="6" width="1240" height="920"><head>
+<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="8" width="1240" height="920"><head>
   <meta charset="UTF-8">
-  <title>Competitive Landscape &amp; Testigos - Scotiabank 2026</title>
+  <title>Competitive Landscape &amp; Testigos 2026</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
@@ -39,32 +39,8 @@
       gap: 16px;
     }
 
-    .scotia-brand-text {
-      font-size: 25px;
-      font-weight: 800;
-      color: #ec111a;
-      letter-spacing: -0.5px;
-      display: inline-flex;
-      align-items: baseline;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .scotia-reg-mark {
-      font-size: 11px;
-      font-weight: 700;
-      vertical-align: super;
-      margin-left: 1px;
-    }
-
-    .header-divider {
-      width: 1px;
-      height: 28px;
-      background-color: #e2e8f0;
-    }
-
     .header-titles h1 {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 700;
       color: #0f172a;
       line-height: 1.2;
@@ -528,7 +504,6 @@
       width: 100%;
     }
 
-    /* ESTILO NATIVO DEL TREEMAP (TOTAL Y SIN DEPENDENCIAS) */
     .treemap-canvas-container {
       position: relative;
       width: 100%;
@@ -756,13 +731,9 @@
 <body>
 
   <div class="dashboard-container">
-    <!-- Header General -->
+    <!-- Header General (Sin Logotipo de Scotiabank) -->
     <div class="header">
       <div class="header-left">
-        <div class="scotia-brand-text">
-          Scotiabank<span class="scotia-reg-mark">®</span>
-        </div>
-        <div class="header-divider"></div>
         <div class="header-titles">
           <h1 id="main-dash-title">Competitive Landscape</h1>
           <p id="main-dash-subtitle">Análisis de Inversión Publicitaria por Marcas y Medios</p>
@@ -956,9 +927,10 @@
         </div>
       </div>
 
+      <!-- PANEL 3 CONSOLIDADO -->
       <div class="insights-panel teal-accent">
-        <h4 id="media-type-insights-title">Insights de Mix de Medios y Formatos Publicitarios (Type)</h4>
-        <p id="media-type-insights-text">Cargando análisis táctico de canales publicitarios...</p>
+        <h4 id="media-type-insights-title">Insights de Mix de Medios, Canales Audiovisuales, Formatos y Portafolio de Productos (Treemap)</h4>
+        <p id="media-type-insights-text">Cargando análisis táctico integral...</p>
       </div>
 
       <div class="charts-grid">
@@ -1041,7 +1013,6 @@
             </div>
           </div>
 
-          <!-- Contenedor Nativo Treemap -->
           <div class="treemap-canvas-container" id="treemapContainer">
             <canvas id="treemapCanvas"></canvas>
             <div class="treemap-floating-tooltip" id="treemapTooltip"></div>
@@ -1178,7 +1149,6 @@
     let mediaMixViewMode = 'ABS';
     let filterMundialActive = false;
 
-    // Estructura de cajas calculadas para el Treemap
     let computedTreemapBoxes = [];
 
     function formatMillions(val) {
@@ -1462,7 +1432,6 @@
               const qRaw = String(findColumnValue(row, /^q$/) || findColumnValue(row, /trimestre|quarter/) || '').trim().toUpperCase();
               const typeRaw = String(findColumnValue(row, /^type$/) || findColumnValue(row, /tipo.*formato|formato/) || 'Otros').trim();
               const descRaw = String(findColumnValue(row, /^descrip/) || '').trim();
-
               const prodRaw = String(findColumnValue(row, /^producto$/) || findColumnValue(row, /^prod$/) || 'Institucional').trim();
 
               const descNorm = descRaw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -1831,12 +1800,24 @@
       const sortedTypes = Object.entries(typeTotals).sort((a, b) => b[1] - a[1]);
       const topType1 = sortedTypes[0] ? `${sortedTypes[0][0]}` : 'SPOT REGULAR';
       const topType1Pct = sortedTypes[0] && grandTotal > 0 ? Math.round((sortedTypes[0][1] / grandTotal) * 100) : 28;
-      const topType2 = sortedTypes[1] ? `${sortedTypes[1][0]}` : 'display';
-      const topType2Pct = sortedTypes[1] && grandTotal > 0 ? Math.round((sortedTypes[1][1] / grandTotal) * 100) : 23;
 
-      let mediaTypeInsight = `A nivel de canales, la inversión del sector se concentra prioritariamente en <strong>${topMedio1}</strong> y <strong>${topMedio2}</strong>. `;
-      mediaTypeInsight += `Marcas tradicionales como <strong>Azteca</strong> y <strong>Banorte</strong> dirigen más del 60%-75% de su presupuesto a TV Abierta (OTV), mientras que <strong>BBVA</strong> y <strong>Banamex</strong> equilibran con más del 50% en medios digitales. `;
-      mediaTypeInsight += `En cuanto a formatos (Type), <strong>${topType1}</strong> (${topType1Pct}%) y <strong>${topType2}</strong> (${topType2Pct}%) representan los formatos de mayor tracción.`;
+      const sortedChannels = Object.entries(broadcastChannelTotals).sort((a, b) => b[1] - a[1]);
+      const topChannelName = sortedChannels[0] ? sortedChannels[0][0] : 'TV Abierta / Emisoras Principales';
+      const totalBroadcastVal = sortedChannels.reduce((sum, item) => sum + item[1], 0);
+      const topChannelPct = (sortedChannels[0] && totalBroadcastVal > 0) ? Math.round((sortedChannels[0][1] / totalBroadcastVal) * 100) : 0;
+
+      const productCounts = {};
+      filtered.forEach(r => {
+        if (r.producto && r.producto.toLowerCase() !== 'general') {
+          productCounts[r.producto] = (productCounts[r.producto] || 0) + 1;
+        }
+      });
+      const topProductsSorted = Object.entries(productCounts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(p => p[0]);
+      const topProductsListText = topProductsSorted.length > 0 ? topProductsSorted.join(', ') : 'Institucional, Tarjetas y Créditos';
+
+      let mediaTypeInsight = `A nivel de canales macro, la inversión publicitaria se concentra prioritariamente en <strong>${topMedio1}</strong> y <strong>${topMedio2}</strong>, apalancándose de formatos como <strong>${topType1}</strong> (${topType1Pct}% de la pauta). `;
+      mediaTypeInsight += `En medios audiovisuales (Radio, OTV, PTV, LTV), el vehículo con mayor concentración de pauta es <strong>${topChannelName}</strong> (${topChannelPct}% del total audiovisual analizado). `;
+      mediaTypeInsight += `Por su parte, el análisis de portafolio en el <strong>Treemap</strong> refleja una diversificación activa donde productos como <strong>${topProductsListText}</strong> mantienen la mayor frecuencia de comunicación entre las marcas competidoras, permitiendo contrastar de forma directa la estrategia de producto de <strong>Scotiabank</strong> frente al mercado.`;
 
       document.getElementById('media-type-insights-text').innerHTML = mediaTypeInsight;
 
@@ -1849,13 +1830,9 @@
       renderTypeChart(typeTotals, grandTotal, selectedTypeMedia);
       renderTable(aggregatedBrands, grandTotal);
 
-      // Renderizar Treemap Nativo Total
       renderNativeTreemap(filtered);
     }
 
-    // ==============================================================
-    // ALGORITMO SQUARIFY NATIVO PARA TREEMAP TOTAL
-    // ==============================================================
     function squarifyLayout(data, x, y, width, height) {
       if (!data || data.length === 0 || width <= 0 || height <= 0) return [];
       const items = data.filter(d => d.value > 0).sort((a, b) => b.value - a.value);
@@ -1923,7 +1900,6 @@
       return results;
     }
 
-    // DIBUJAR TREEMAP NATIVO EN CANVAS (TOTAL Y SIN CIFRAS)
     function renderNativeTreemap(records) {
       const canvas = document.getElementById('treemapCanvas');
       const container = document.getElementById('treemapContainer');
@@ -1948,7 +1924,6 @@
         filtered = records.filter(r => r.brand === selBrand);
       }
 
-      // Agrupar apariciones por Marca y Producto
       const counts = {};
       filtered.forEach(r => {
         const b = r.brand || 'Otros';
@@ -1962,7 +1937,7 @@
         return {
           brand: brand,
           producto: producto,
-          value: c // Conteo para dimensionar
+          value: c
         };
       });
 
@@ -1975,7 +1950,6 @@
         return;
       }
 
-      // Paleta corporativa fija por marca
       const brandColorsMap = {
         'Scotiabank': '#ec111a',
         'Banamex': '#0284c7',
@@ -1991,7 +1965,6 @@
       };
       const fallbackPalette = ['#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2', '#4f46e5', '#be123c'];
 
-      // Calcular posiciones con Squarify
       const boxes = squarifyLayout(items, 0, 0, w, h);
       computedTreemapBoxes = boxes;
 
@@ -2000,14 +1973,12 @@
       boxes.forEach(box => {
         const color = brandColorsMap[box.brand] || fallbackPalette[Math.abs(box.brand.length) % fallbackPalette.length];
         
-        // Rectángulo con borde blanco sutil
         ctx.fillStyle = color;
         ctx.fillRect(box.x, box.y, box.width, box.height);
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1.5;
         ctx.strokeRect(box.x, box.y, box.width, box.height);
 
-        // Texto cualitativo (Producto y Marca) - CERO CIFRAS
         if (box.width > 55 && box.height > 25) {
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
@@ -2031,7 +2002,6 @@
       });
     }
 
-    // Tooltip flotante nativo para el Treemap
     function setupTreemapInteractions() {
       const container = document.getElementById('treemapContainer');
       const tooltip = document.getElementById('treemapTooltip');
@@ -2801,7 +2771,6 @@
       document.getElementById('type-media-filter').addEventListener('change', applyFilters);
       document.getElementById('broadcast-medium-selector').addEventListener('change', applyFilters);
 
-      // Evento de cambio en el selector de Marca del Treemap
       document.getElementById('treemap-brand-filter').addEventListener('change', () => {
         applyFilters();
       });
