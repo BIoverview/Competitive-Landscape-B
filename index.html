@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="8" width="1240" height="920"><head>
+<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="9" width="1240" height="920"><head>
   <meta charset="UTF-8">
   <title>Competitive Landscape &amp; Testigos 2026</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -731,7 +731,7 @@
 <body>
 
   <div class="dashboard-container">
-    <!-- Header General (Sin Logotipo de Scotiabank) -->
+    <!-- Header General -->
     <div class="header">
       <div class="header-left">
         <div class="header-titles">
@@ -824,7 +824,8 @@
 
       <div class="metrics-grid">
         <div class="metric-card primary" id="kpi-qoq-card">
-          <p id="kpi-title-1">Variación QoQ Scotiabank</p>
+          <!-- ETIQUETA AJUSTADA A: Variación Q -->
+          <p id="kpi-title-1">Variación Q</p>
           <h3 id="kpi-scotiabank-val">-</h3>
           <span class="metric-diff neutral" id="kpi-scotia-share">Calculando vs Q anterior...</span>
         </div>
@@ -927,7 +928,6 @@
         </div>
       </div>
 
-      <!-- PANEL 3 CONSOLIDADO -->
       <div class="insights-panel teal-accent">
         <h4 id="media-type-insights-title">Insights de Mix de Medios, Canales Audiovisuales, Formatos y Portafolio de Productos (Treemap)</h4>
         <p id="media-type-insights-text">Cargando análisis táctico integral...</p>
@@ -997,7 +997,6 @@
         </div>
       </div>
 
-      <!-- TREEMAP NATIVO TOTAL DE PRODUCTOS POR MARCA -->
       <div class="charts-grid">
         <div class="chart-panel" style="grid-column: span 2;">
           <div class="panel-header">
@@ -1677,7 +1676,8 @@
       const targetQ2 = targetRecords.filter(r => r.q === 'Q2').reduce((s, r) => s + r.inv, 0);
       const targetQ3 = targetRecords.filter(r => r.q === 'Q3').reduce((s, r) => s + r.inv, 0);
 
-      document.getElementById('kpi-title-1').textContent = `Variación QoQ ${targetName}`;
+      // MANTENER LA ETIQUETA EN: Variación Q
+      document.getElementById('kpi-title-1').textContent = `Variación Q`;
 
       const kpiValEl = document.getElementById('kpi-scotiabank-val');
       const kpiSubEl = document.getElementById('kpi-scotia-share');
