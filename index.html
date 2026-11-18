@@ -1,294 +1,2843 @@
-<html lang="es"><head>
+<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="9" width="1240" height="920"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Testigos Publicitarios - Scotiabank</title>
+  <title>Competitive Landscape &amp; Testigos 2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f8fafc; color: #1e293b; padding: 24px;
+      background-color: #ffffff;
+      color: #1e293b;
+      padding: 20px 24px;
     }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+
+    /* Header */
     .header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
-    }
-    .title-area h1 { font-size: 22px; font-weight: 700; color: #0f172a; }
-    .badge-live { font-size: 11px; background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
-    .subtitle { font-size: 13px; color: #64748b; margin-top: 4px; }
-    
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .kpi-card { background: #ffffff; padding: 16px 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
-    .kpi-label { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; }
-    .kpi-value { font-size: 22px; font-weight: 700; color: #0f172a; margin-top: 6px; }
-
-    .toolbar { display: flex; justify-content: space-between; margin-bottom: 16px; gap: 12px; }
-    .search-box { padding: 9px 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 14px; width: 100%; max-width: 320px; }
-
-    .table-container { background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
-    thead tr { background-color: #f1f5f9; border-bottom: 1px solid #e2e8f0; color: #475569; font-weight: 600; }
-    th, td { padding: 14px 18px; }
-    tbody tr { border-bottom: 1px solid #f1f5f9; }
-    tbody tr:hover { background-color: #f8fafc; }
-
-    .thumb-wrapper {
-      width: 80px; height: 52px; border-radius: 6px; overflow: hidden; border: 1px solid #cbd5e1;
-      background: #0f172a; cursor: pointer; position: relative; display: flex; align-items: center; justify-content: center;
-    }
-    .thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-    .play-overlay {
-      position: absolute; width: 24px; height: 24px; background: rgba(220, 38, 38, 0.9);
-      color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #f1f5f9;
+      margin-bottom: 16px;
     }
 
-    .format-tag { font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
-    .format-image { background: #e0f2fe; color: #0369a1; }
-    .format-video { background: #fee2e2; color: #b91c1c; }
-
-    .badge-status { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; background: #dcfce7; color: #15803d; }
-    .btn-link { color: #2563eb; text-decoration: none; font-weight: 600; font-size: 12px; }
-
-    .modal {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
-    .modal.active { display: flex; }
-    .modal-content { background: #ffffff; border-radius: 12px; max-width: 850px; width: 100%; overflow: hidden; }
-    .modal-header { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
-    .modal-body { background: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 400px; }
-    .modal-footer { padding: 12px 20px; background: #f8fafc; display: flex; justify-content: space-between; font-size: 13px; }
+
+    .header-titles h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .header-titles p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #065f46;
+    }
+
+    .status-badge.loading {
+      background-color: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1e40af;
+    }
+
+    .status-badge.warning {
+      background-color: #fffbeb;
+      border-color: #fde68a;
+      color: #92400e;
+    }
+
+    .period-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background-color: #fff1f2;
+      border: 1px solid #fecdd3;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #9f1239;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #e11d48;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* Pestañas */
+    .nav-tabs-container {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 18px;
+    }
+
+    .nav-tab-btn {
+      padding: 10px 22px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #64748b;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab-btn:hover {
+      color: #0f172a;
+      background-color: #f8fafc;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .nav-tab-btn.active {
+      color: #ec111a;
+      border-bottom-color: #ec111a;
+      background: transparent;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Filters Bar */
+    .filters-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 14px 16px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      margin-bottom: 20px;
+      align-items: flex-end;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 155px;
+      flex: 1;
+    }
+
+    .filter-group label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .filter-group select {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #1e293b;
+      background-color: #ffffff;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .filter-group select:focus {
+      border-color: #ec111a;
+      box-shadow: 0 0 0 2px rgba(236,17,26,0.1);
+    }
+
+    .mundial-btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .mundial-btn-container label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .mundial-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1.5px solid #cbd5e1;
+      background: #ffffff;
+      color: #1e293b;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      height: 38px;
+    }
+
+    .mundial-toggle-btn:hover {
+      border-color: #ec111a;
+      color: #ec111a;
+      background: #fff1f2;
+    }
+
+    .mundial-toggle-btn.active {
+      background: #ec111a;
+      color: #ffffff;
+      border-color: #ec111a;
+      box-shadow: 0 2px 6px rgba(236, 17, 26, 0.25);
+    }
+
+    .mundial-toggle-btn .mundial-count {
+      font-size: 10.5px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .mundial-toggle-btn.active .mundial-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    .reset-btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .reset-filters-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+      height: 38px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .reset-filters-btn:hover {
+      border-color: #94a3b8;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .metric-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      border-left: 4px solid #cbd5e1;
+    }
+
+    .metric-card.primary { border-left-color: #ec111a; }
+    .metric-card.secondary { border-left-color: #2563eb; }
+    .metric-card.tertiary { border-left-color: #10b981; }
+    .metric-card.accent { border-left-color: #f59e0b; }
+
+    .metric-card p {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 6px 0 2px 0;
+    }
+
+    .metric-diff {
+      font-size: 12px;
+      color: #ec111a;
+      font-weight: 600;
+    }
+
+    .metric-diff.positive { color: #059669; }
+    .metric-diff.negative { color: #dc2626; }
+    .metric-diff.neutral { color: #64748b; font-weight: 500; }
+
+    .insights-panel {
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-left: 4px solid #ec111a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .insights-panel.blue-accent {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #1e3a8a;
+    }
+
+    .insights-panel.teal-accent {
+      background: #f0fdfa;
+      border: 1px solid #ccfbf1;
+      border-left: 4px solid #0d9488;
+    }
+
+    .insights-panel h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .insights-panel p {
+      font-size: 13px;
+      color: #44403c;
+      line-height: 1.55;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .chart-panel {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .panel-header-titles h2, .panel-header-titles h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .panel-header-titles p {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .panel-header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-header-controls label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .panel-select {
+      padding: 6px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #1e293b;
+      background-color: #ffffff;
+      outline: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .panel-select:focus {
+      border-color: #ec111a;
+      box-shadow: 0 0 0 2px rgba(236,17,26,0.1);
+    }
+
+    .trend-toggle-group {
+      display: inline-flex;
+      background: #f1f5f9;
+      padding: 3px;
+      border-radius: 7px;
+      gap: 4px;
+    }
+
+    .trend-toggle-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .trend-toggle-btn.active {
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .panel-badge {
+      font-size: 11px;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .chart-legend-pills {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .chart-wrapper {
+      position: relative;
+      height: 290px;
+      width: 100%;
+    }
+
+    .treemap-canvas-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    #treemapCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: default;
+    }
+
+    .treemap-floating-tooltip {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      background: rgba(15, 23, 42, 0.95);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 50;
+      white-space: nowrap;
+      transition: opacity 0.1s ease;
+    }
+
+    /* Tabla */
+    .table-panel {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      margin-bottom: 20px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background-color: #f8fafc;
+      color: #475569;
+      font-weight: 600;
+      padding: 11px 14px;
+      border-bottom: 2px solid #e2e8f0;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    tr:hover td { background-color: #fbfcfe; }
+
+    .brand-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .target-client {
+      background-color: #fff1f2 !important;
+      font-weight: 600;
+    }
+
+    .target-client td { color: #be123c; }
+
+    /* ESTILOS DE TESTIGOS */
+    .testigos-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 720px;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .testigos-filters-card {
+      padding: 12px 18px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .testigos-split-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .testigos-list-pane {
+      flex: 1.15;
+      overflow-y: auto;
+      border-right: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+
+    .testigos-list-pane table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .testigos-list-pane th {
+      position: sticky;
+      top: 0;
+      background: #f8fafc;
+      z-index: 10;
+      padding: 9px 12px;
+      border-bottom: 2px solid #e2e8f0;
+      font-size: 10.5px;
+      color: #64748b;
+    }
+
+    .testigos-list-pane td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+    }
+
+    .testigos-list-pane tr.active {
+      background-color: #eff6ff !important;
+    }
+
+    .testigos-list-pane tr:hover { background-color: #f8fafc; }
+
+    .badge-t {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-video { background: #fee2e2; color: #b91c1c; }
+    .badge-audio { background: #fef3c7; color: #b45309; }
+    .badge-revista { background: #e0e7ff; color: #4338ca; }
+    .badge-default { background: #e2e8f0; color: #475569; }
+
+    .testigos-viewer-pane {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #0f172a;
+      color: white;
+      position: relative;
+    }
+
+    .testigos-viewer-header {
+      padding: 14px 18px;
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+    }
+
+    .testigos-viewer-header h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .testigos-viewer-header p {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .testigos-viewer-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+      background: #0b0f19;
+    }
+
+    .testigos-viewer-body video,
+    .testigos-viewer-body audio,
+    .testigos-viewer-body img,
+    .testigos-viewer-body iframe {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 6px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.65);
+    }
+
+    .testigos-viewer-body audio { width: 85%; }
+    .testigos-viewer-body iframe { width: 100%; height: 100%; border: none; background: white; }
+    .testigos-placeholder { color: #64748b; text-align: center; font-size: 13px; }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <div class="title-area">
-      <h1>Panel de Testigos Publicitarios <span class="badge-live">● Scotiabank Q2</span></h1>
-      <p class="subtitle" id="lastUpdated">Cargando registros...</p>
-    </div>
-  </div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="kpi-label">Total Testigos</div>
-      <div class="kpi-value" id="kpiTotal">-</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Imágenes</div>
-      <div class="kpi-value" id="kpiImages" style="color: #0284c7;">-</div>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Videos</div>
-      <div class="kpi-value" id="kpiVideos" style="color: #dc2626;">-</div>
-    </div>
-  </div>
-
-  <div class="toolbar">
-    <input type="text" id="searchInput" class="search-box" placeholder="Buscar por marca, campaña o soporte...">
-  </div>
-
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Testigo (Clic para ver)</th>
-          <th>Marca</th>
-          <th>Campaña</th>
-          <th>Tipo / Formato</th>
-          <th>Fecha</th>
-          <th>Estado</th>
-          <th>Enlace</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr>
-          <td colspan="7" style="text-align: center; padding: 30px; color: #64748b;">
-            Cargando testigos desde GitHub...
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="modal" id="mediaModal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <h3 id="modalTitle" style="font-size: 15px; color: #0f172a;">Vista Previa</h3>
-        <button onclick="closeModal()" style="border:none; background:none; font-size:20px; cursor:pointer;">×</button>
+  <div class="dashboard-container">
+    <!-- Header General -->
+    <div class="header">
+      <div class="header-left">
+        <div class="header-titles">
+          <h1 id="main-dash-title">Competitive Landscape</h1>
+          <p id="main-dash-subtitle">Análisis de Inversión Publicitaria por Marcas y Medios</p>
+        </div>
       </div>
-      <div class="modal-body" id="modalContainer"></div>
-      <div class="modal-footer">
-        <span id="modalDesc" style="color: #64748b;">Detalle</span>
-        <a id="modalExternalLink" class="btn-link" href="#" target="_blank">Abrir archivo original ↗</a>
+      <div class="header-right">
+        <div class="status-badge loading" id="sync-status-badge">
+          <span class="sync-dot" id="sync-dot"></span>
+          <span id="sync-status-text">Conectando...</span>
+        </div>
+        <div class="period-badge">
+          <span class="status-dot"></span>
+          <span>Periodo: Ene - Sep 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pestañas de Navegación -->
+    <div class="nav-tabs-container">
+      <button type="button" class="nav-tab-btn active" id="tab-btn-landscape">
+        <span>📊 Competitive Landscape</span>
+      </button>
+      <button type="button" class="nav-tab-btn" id="tab-btn-testigos">
+        <span>🎬 Testigos</span>
+      </button>
+      <button type="button" class="nav-tab-btn" id="tab-btn-resumen">
+        <span>📋 Resumen Detallado</span>
+      </button>
+    </div>
+
+    <!-- PESTAÑA 1: COMPETITIVE LANDSCAPE -->
+    <div class="tab-content active" id="tab-content-landscape">
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label for="quarter-filter">Periodo / Trimestre</label>
+          <select id="quarter-filter">
+            <option value="ALL" selected="">Acumulado (Q1 - Q3)</option>
+            <option value="Q1">Q1 (Ene - Mar)</option>
+            <option value="Q2">Q2 (Abr - Jun)</option>
+            <option value="Q3">Q3 (Jul - Sep)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="classification-filter">Clasificación</label>
+          <select id="classification-filter">
+            <option value="ALL" selected="">Todas las Clasificaciones</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="macro-media-filter">Tipo de Medio</label>
+          <select id="macro-media-filter">
+            <option value="ALL" selected="">Todos (ON + OFF)</option>
+            <option value="OFF">Medios OFF</option>
+            <option value="ON">Medios ON</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="media-type-filter">Canal de Medio</label>
+          <select id="media-type-filter">
+            <option value="ALL" selected="">Todos los canales</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="competitor-filter">Enfoque de Marca</label>
+          <select id="competitor-filter">
+            <option value="ALL" selected="">Todas las Marcas</option>
+          </select>
+        </div>
+
+        <div class="mundial-btn-container">
+          <label>Filtro Especial</label>
+          <button type="button" class="mundial-toggle-btn" id="btn-mundial-filter">
+            <span>⚽ Actividad Mundial</span>
+            <span class="mundial-count" id="mundial-counter">0</span>
+          </button>
+        </div>
+
+        <div class="reset-btn-container">
+          <button type="button" class="reset-filters-btn" id="btn-reset-filters">
+            Restablecer filtros
+          </button>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card primary" id="kpi-qoq-card">
+          <!-- ETIQUETA AJUSTADA A: Variación Q -->
+          <p id="kpi-title-1">Variación Q</p>
+          <h3 id="kpi-scotiabank-val">-</h3>
+          <span class="metric-diff neutral" id="kpi-scotia-share">Calculando vs Q anterior...</span>
+        </div>
+        <div class="metric-card secondary">
+          <p id="kpi-title-2">Inversión Total Mercado</p>
+          <h3 id="kpi-total-val">$0.0M</h3>
+          <span class="metric-diff neutral" id="kpi-total-sub">Total Marcas Analizadas</span>
+        </div>
+        <div class="metric-card accent">
+          <p id="kpi-title-3">Líder en Inversión</p>
+          <h3 id="kpi-leader-name">-</h3>
+          <span class="metric-diff neutral" id="kpi-leader-share">$0.0M (0% SOI)</span>
+        </div>
+        <div class="metric-card tertiary">
+          <p id="kpi-title-4">Mix ON vs OFF (Total)</p>
+          <h3 id="kpi-mix-ratio">- / -</h3>
+          <span class="metric-diff neutral" id="kpi-mix-sub">Cargando distribución...</span>
+        </div>
+      </div>
+
+      <div class="insights-panel">
+        <h4 id="strategic-insights-title">Insights Estratégicos de Inversión (SOI)</h4>
+        <p id="strategic-insights-text">Procesando datos consolidados de inversión...</p>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-panel">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Share de Inversión % por Clasificación</h2>
+              <p>Participación porcentual mostrada directamente dentro de cada segmento</p>
+            </div>
+            <span class="panel-badge">Consolidado</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="classificationChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-panel">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Share de Inversión % por Marca</h2>
+              <p>Distribución de SOI mostrada directamente dentro de cada segmento</p>
+            </div>
+            <span class="panel-badge">Competencia</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="brandSoiChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-panel blue-accent">
+        <h4 id="competitor-trend-insights-title">Insights de Competidores y Tendencia Temporal</h4>
+        <p id="competitor-trend-insights-text">Cargando análisis dinámico del ranking competitivo...</p>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-panel">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Top Competidores</h2>
+              <p>Inversión acumulada por marca codificada por clasificación</p>
+            </div>
+          </div>
+          <div class="chart-legend-pills">
+            <div class="legend-item">
+              <span class="legend-color-dot" style="background-color: #1e3a8a;"></span>
+              <span>Banca Tradicional</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-dot" style="background-color: #7c3aed;"></span>
+              <span>Fintech / Neobancos</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-dot" style="background-color: #f59e0b;"></span>
+              <span>Medios de Pago / Tarjetas</span>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="height: 255px;">
+            <canvas id="topCompetitorsChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-panel">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Tendencia Mensual de Inversión por Marca</h2>
+              <p>Evolución temporal de la pauta mes a mes (Ene - Sep 2026)</p>
+            </div>
+            <div class="trend-toggle-group">
+              <button type="button" class="trend-toggle-btn active" id="btn-trend-brands">Por Marcas</button>
+              <button type="button" class="trend-toggle-btn" id="btn-trend-total">Total</button>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="height: 280px;">
+            <canvas id="monthlyTrendChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-panel teal-accent">
+        <h4 id="media-type-insights-title">Insights de Mix de Medios, Canales Audiovisuales, Formatos y Portafolio de Productos (Treemap)</h4>
+        <p id="media-type-insights-text">Cargando análisis táctico integral...</p>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-panel" style="grid-column: span 2;">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Mix de Inversión por Medio y Competidor</h2>
+              <p>Desglose de medios con % de participación (Share of Media) de cada marca</p>
+            </div>
+            <div class="panel-header-controls">
+              <div class="trend-toggle-group">
+                <button type="button" class="trend-toggle-btn active" id="btn-mediamix-abs">Inversión ($M)</button>
+                <button type="button" class="trend-toggle-btn" id="btn-mediamix-pct">Mix 100%</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="height: 320px;">
+            <canvas id="mediaMixChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-panel" style="grid-column: span 2;">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Detalle por Canal / Emisora: Radio, OTV, PTV y LTV</h2>
+              <p>Inversión acumulada en formato de barras verticales con porcentaje (%) visible en cada canal</p>
+            </div>
+            <div class="panel-header-controls">
+              <label for="broadcast-medium-selector">Medio:</label>
+              <select id="broadcast-medium-selector" class="panel-select">
+                <option value="ALL" selected="">Consolidado (Todos)</option>
+                <option value="Radio">Radio</option>
+                <option value="OTV">OTV (TV Abierta)</option>
+                <option value="PTV">PTV (TV Paga)</option>
+                <option value="LTV">LTV (Local TV)</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="height: 320px;">
+            <canvas id="broadcastDetailChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-panel" style="grid-column: span 2;">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Inversión por Formato Publicitario (Type)</h2>
+              <p>Distribución acumulada por tipo de ejecución con porcentaje (%) visible en cada barra</p>
+            </div>
+            <div class="panel-header-controls">
+              <label for="type-media-filter">Medio:</label>
+              <select id="type-media-filter" class="panel-select">
+                <option value="ALL" selected="">Todos los medios</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="height: 280px;">
+            <canvas id="typeChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-panel" style="grid-column: span 2;">
+          <div class="panel-header">
+            <div class="panel-header-titles">
+              <h2>Mapeo Total de Productos por Marca (Treemap)</h2>
+              <p>Visualización cualitativa total de productos comunicados en el mercado (sin cifras de inversión)</p>
+            </div>
+            <div class="panel-header-controls">
+              <label for="treemap-brand-filter">Filtrar Marca:</label>
+              <select id="treemap-brand-filter" class="panel-select">
+                <option value="ALL" selected="">Todas las Marcas (Total)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="treemap-canvas-container" id="treemapContainer">
+            <canvas id="treemapCanvas"></canvas>
+            <div class="treemap-floating-tooltip" id="treemapTooltip"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 2: TESTIGOS AUDITSA -->
+    <div class="tab-content" id="tab-content-testigos">
+      <div class="testigos-wrapper">
+        <div class="testigos-filters-card">
+          <div class="filter-group">
+            <label for="t-ano-filter">Año</label>
+            <select id="t-ano-filter">
+              <option value="">Todos los Años</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="t-q-filter">Periodo / Q</label>
+            <select id="t-q-filter">
+              <option value="">Todos los Q</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="t-medio-filter">Tipo de Medio</label>
+            <select id="t-medio-filter">
+              <option value="">Todos los Medios</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="t-marca-filter">Enfoque de Marca</label>
+            <select id="t-marca-filter">
+              <option value="">Todas las Marcas</option>
+            </select>
+          </div>
+
+          <div class="reset-btn-container">
+            <button type="button" class="reset-filters-btn" id="btn-reset-testigos">
+              Restablecer filtros
+            </button>
+          </div>
+
+          <span id="t-counter" style="font-size: 12px; color: #64748b; font-weight: 600; margin-left: auto; align-self: center;">
+            Cargando testigos...
+          </span>
+        </div>
+
+        <div class="testigos-split-container">
+          <div class="testigos-list-pane">
+            <table>
+              <thead>
+                <tr>
+                  <th>Año</th>
+                  <th>Q</th>
+                  <th>Medio</th>
+                  <th>Marca</th>
+                  <th>Producto</th>
+                  <th>Canal</th>
+                  <th>Dur.</th>
+                </tr>
+              </thead>
+              <tbody id="testigos-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="testigos-viewer-pane">
+            <div class="testigos-viewer-header">
+              <h3 id="t-viewer-title">Selecciona un testigo</h3>
+              <p id="t-viewer-details">Haz clic en cualquier registro para visualizarlo aquí sin salir.</p>
+            </div>
+            <div class="testigos-viewer-body" id="t-viewer-body">
+              <div class="testigos-placeholder">Ningún testigo seleccionado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 3: RESUMEN DETALLADO -->
+    <div class="tab-content" id="tab-content-resumen">
+      <div class="table-panel">
+        <div class="panel-header">
+          <div class="panel-header-titles">
+            <h3>Resumen Detallado por Marca y Quarter (Q1, Q2, Q3 2026)</h3>
+            <p>Cifras en millones de pesos ($M MXN)</p>
+          </div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Marca</th>
+                <th>Clasificación</th>
+                <th>Q1 2026</th>
+                <th>Q2 2026</th>
+                <th>Q3 2026</th>
+                <th>Total Inversión</th>
+                <th>SOI %</th>
+                <th>Medio Principal</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Tu enlace exacto de GitHub:
-    const EXACT_GITHUB_CSV = 'https://raw.githubusercontent.com/Victor-diaz-gif/Scotiabank/refs/heads/main/testigos.csv..csv';
+    const GITHUB_CSV_URL = "https://raw.githubusercontent.com/Victor-diaz-gif/Scotiabank/refs/heads/main/Base%20Scotiabank.csv";
 
-    let globalRows = [];
+    const TESTIGOS_URLS = [
+      "https://raw.githubusercontent.com/Victor-diaz-gif/Scotiabank/refs/heads/main/testigos.csv.",
+      "https://raw.githubusercontent.com/Victor-diaz-gif/Scotiabank/refs/heads/main/testigos.csv",
+      "./testigos.csv"
+    ];
 
-    function parseMediaUrl(rawUrl, rawType) {
-      const type = (rawType || '').toLowerCase().includes('video') ? 'video' : 'image';
-      let viewUrl = rawUrl || '';
-      let thumbUrl = rawUrl || '';
+    let rawRecords = [];
+    let rawTestigos = [];
 
-      if (rawUrl && rawUrl.includes('drive.google.com')) {
-        const match = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) {
-          const driveId = match[1];
-          thumbUrl = `https://drive.google.com/thumbnail?id=${driveId}&sz=w800`;
-          viewUrl = (type === 'video')
-            ? `https://drive.google.com/file/d/${driveId}/preview`
-            : `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`;
-        }
-      }
-      return { type, viewUrl, thumbUrl, originalUrl: rawUrl };
+    let classificationChartInstance = null;
+    let brandSoiChartInstance = null;
+    let topCompetitorsChartInstance = null;
+    let monthlyTrendChartInstance = null;
+    let mediaMixChartInstance = null;
+    let broadcastDetailChartInstance = null;
+    let typeChartInstance = null;
+
+    let trendViewMode = 'BRANDS';
+    let mediaMixViewMode = 'ABS';
+    let filterMundialActive = false;
+
+    let computedTreemapBoxes = [];
+
+    function formatMillions(val) {
+      if (typeof val !== 'number' || isNaN(val)) return '0.0';
+      return val.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
     }
 
-    function parseCSV(text) {
-      const lines = text.trim().split(/\r?\n/);
-      if (lines.length === 0) return [];
+    const insideDoughnutPercentPlugin = {
+      id: 'insideDoughnutPercent',
+      afterDatasetsDraw(chart) {
+        const { ctx, data } = chart;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data) return;
+        const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+        if (!total || total === 0) return;
 
-      return lines.map(line => {
-        const row = [];
-        let insideQuote = false;
-        let entry = '';
-        for (let i = 0; i < line.length; i++) {
-          const char = line[i];
-          if (char === '"') {
-            insideQuote = !insideQuote;
-          } else if (char === ',' && !insideQuote) {
-            row.push(entry.trim());
-            entry = '';
-          } else {
-            entry += char;
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+        meta.data.forEach((element, index) => {
+          const val = data.datasets[0].data[index];
+          const pct = Math.round((val / total) * 100);
+          if (pct >= 3) {
+            const pos = element.tooltipPosition();
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+            ctx.shadowBlur = 4;
+            ctx.fillText(`${pct}%`, pos.x, pos.y);
           }
+        });
+        ctx.restore();
+      }
+    };
+
+    const insideBarPercentPlugin = {
+      id: 'insideBarPercent',
+      afterDatasetsDraw(chart) {
+        const { ctx, data } = chart;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data) return;
+        const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+        if (!total || total === 0) return;
+
+        ctx.save();
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+        meta.data.forEach((element, index) => {
+          const val = data.datasets[0].data[index];
+          const pct = Math.round((val / total) * 100);
+          const labelText = `${pct}%`;
+          const textWidth = ctx.measureText(labelText).width;
+          const barWidth = element.x - element.base;
+
+          if (barWidth > textWidth + 16) {
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'right';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = 3;
+            ctx.fillText(labelText, element.x - 8, element.y);
+          } else {
+            ctx.fillStyle = '#1e293b';
+            ctx.textAlign = 'left';
+            ctx.shadowBlur = 0;
+            ctx.fillText(labelText, element.x + 6, element.y);
+          }
+        });
+        ctx.restore();
+      }
+    };
+
+    const insideStackedMediaPercentPlugin = {
+      id: 'insideStackedMediaPercent',
+      afterDatasetsDraw(chart) {
+        const { ctx, data } = chart;
+        const numBrands = data.labels.length;
+        if (numBrands === 0) return;
+
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+        const brandTotals = new Array(numBrands).fill(0);
+        data.datasets.forEach(ds => {
+          ds.data.forEach((val, bIdx) => {
+            brandTotals[bIdx] += (val || 0);
+          });
+        });
+
+        data.datasets.forEach((ds, dsIdx) => {
+          const meta = chart.getDatasetMeta(dsIdx);
+          if (!meta || meta.hidden) return;
+
+          meta.data.forEach((element, bIdx) => {
+            const rawVal = ds.data[bIdx] || 0;
+            const bTotal = brandTotals[bIdx];
+            if (bTotal === 0 || rawVal === 0) return;
+
+            const pctOfBrand = Math.round((rawVal / bTotal) * 100);
+            const segHeight = Math.abs(element.base - element.y);
+            if (pctOfBrand >= 6 && segHeight >= 14) {
+              const centerY = (element.y + element.base) / 2;
+              ctx.fillStyle = '#ffffff';
+              ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+              ctx.shadowBlur = 3;
+              ctx.fillText(`${pctOfBrand}%`, element.x, centerY);
+            }
+          });
+        });
+        ctx.restore();
+      }
+    };
+
+    const insideVerticalBarPercentPlugin = {
+      id: 'insideVerticalBarPercent',
+      afterDatasetsDraw(chart) {
+        const { ctx, data } = chart;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data) return;
+        const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
+        if (!total || total === 0) return;
+
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+        meta.data.forEach((element, index) => {
+          const val = data.datasets[0].data[index];
+          if (!val || val === 0) return;
+
+          const pct = Math.round((val / total) * 100);
+          const labelText = `${pct}%`;
+          const barHeight = Math.abs(element.base - element.y);
+
+          if (barHeight >= 22) {
+            ctx.fillStyle = '#ffffff';
+            ctx.textBaseline = 'top';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+            ctx.shadowBlur = 3;
+            ctx.fillText(labelText, element.x, element.y + 6);
+          } else {
+            ctx.fillStyle = '#1e293b';
+            ctx.textBaseline = 'bottom';
+            ctx.shadowBlur = 0;
+            ctx.fillText(labelText, element.x, element.y - 3);
+          }
+        });
+        ctx.restore();
+      }
+    };
+
+    const PALETA_3_COLORES = {
+      banca: '#1e3a8a',
+      fintech: '#7c3aed',
+      pagos: '#f59e0b'
+    };
+
+    function obtenerColorClasificacion(clasif) {
+      const c = (clasif || '').trim().toLowerCase();
+      if (c.includes('tradicional') || c.includes('banca')) return PALETA_3_COLORES.banca;
+      if (c.includes('fintech') || c.includes('digital') || c.includes('neo')) return PALETA_3_COLORES.fintech;
+      if (c.includes('pago') || c.includes('tarjeta') || c.includes('medio')) return PALETA_3_COLORES.pagos;
+      return PALETA_3_COLORES.banca;
+    }
+
+    const MESES_MAP = {
+      'ene': 0, 'enero': 0, 'jan': 0,
+      'feb': 1, 'febrero': 1,
+      'mar': 2, 'marzo': 2,
+      'abr': 3, 'abril': 3, 'apr': 3,
+      'may': 4, 'mayo': 4,
+      'jun': 5, 'junio': 5,
+      'jul': 6, 'julio': 6,
+      'ago': 7, 'agosto': 7, 'aug': 7,
+      'sep': 8, 'septiembre': 8, 'set': 8, 'sept': 8
+    };
+
+    function findColumnValue(row, regexPattern) {
+      for (const key in row) {
+        if (!Object.prototype.hasOwnProperty.call(row, key)) continue;
+        const normalized = key.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (regexPattern.test(normalized)) return row[key];
+      }
+      return null;
+    }
+
+    function parseMoneyToMillions(val) {
+      if (typeof val === 'number') return val / 1000000;
+      if (!val) return 0;
+      let str = String(val).trim().replace(/[$ ]/g, '');
+      if (str.includes(',') && str.includes('.')) {
+        if (str.indexOf(',') > str.indexOf('.')) {
+          str = str.replace(/\./g, '').replace(',', '.');
+        } else {
+          str = str.replace(/,/g, '');
         }
-        row.push(entry.trim());
-        return row;
+      } else if (str.includes(',')) {
+        if (/,\d{2}$/.test(str)) {
+          str = str.replace(',', '.');
+        } else {
+          str = str.replace(/,/g, '');
+        }
+      }
+      const num = parseFloat(str);
+      return (isNaN(num) ? 0 : num) / 1000000;
+    }
+
+    function extractBroadcastChannelName(row, medio, desc) {
+      const explicitCol = findColumnValue(row, /^canal$|^canal.*especifico|^vehiculo|^soporte|^emisora|^estacion|^cadena|^programa|^plaza/);
+      if (explicitCol && String(explicitCol).trim().length > 1) {
+        return String(explicitCol).trim();
+      }
+
+      const mUpper = (medio || '').toUpperCase();
+      const dUpper = (desc || '').toUpperCase();
+
+      if (mUpper.includes('RADIO')) {
+        if (dUpper.includes('W RADIO') || dUpper.includes('96.9')) return 'W Radio (96.9 FM)';
+        if (dUpper.includes('FORMULA') || dUpper.includes('103.3') || dUpper.includes('104.1')) return 'Radio Fórmula';
+        if (dUpper.includes('LOS 40') || dUpper.includes('101.7')) return 'Los 40 (101.7 FM)';
+        if (dUpper.includes('STEREO JOYA') || dUpper.includes('93.7')) return 'Stereo Joya (93.7 FM)';
+        if (dUpper.includes('LA KE BUENA') || dUpper.includes('92.9') || dUpper.includes('KE BUENA')) return 'La Ke Buena (92.9 FM)';
+        if (dUpper.includes('EXA') || dUpper.includes('104.9')) return 'Exa FM (104.9 FM)';
+        if (dUpper.includes('RADIO RED') || dUpper.includes('RED')) return 'Radio Red (88.1 FM)';
+        if (dUpper.includes('ALFA') || dUpper.includes('91.3')) return 'Alfa 91.3 FM';
+        if (dUpper.includes('BEAT') || dUpper.includes('100.9')) return 'Beat 100.9 FM';
+        if (dUpper.includes('EL HERALDO') || dUpper.includes('98.5')) return 'El Heraldo Radio';
+        if (dUpper.includes('UNIVERSAL') || dUpper.includes('88.1')) return 'Universal 88.1 FM';
+        if (dUpper.includes('RADIO CENTRO')) return 'Grupo Radio Centro';
+        if (dUpper.includes('IMER')) return 'IMER Radio';
+        return 'Radio Fórmula / Cadenas FM';
+      }
+
+      if (mUpper.includes('OTV')) {
+        if (dUpper.includes('LAS ESTRELLAS') || dUpper.includes('CANAL 2')) return 'Las Estrellas (Canal 2)';
+        if (dUpper.includes('AZTECA UNO') || dUpper.includes('CANAL 13')) return 'Azteca Uno';
+        if (dUpper.includes('CANAL 5')) return 'Canal 5';
+        if (dUpper.includes('AZTECA 7') || dUpper.includes('CANAL 7')) return 'Azteca 7';
+        if (dUpper.includes('IMAGEN') || dUpper.includes('CANAL 3')) return 'Imagen TV';
+        if (dUpper.includes('ADN40') || dUpper.includes('ADN 40')) return 'adn40';
+        if (dUpper.includes('FOROTV') || dUpper.includes('FORO TV')) return 'FOROtv';
+        return 'TV Abierta Nacional';
+      }
+
+      if (mUpper.includes('PTV')) return 'Canales TV Paga (PTV)';
+      if (mUpper.includes('LTV')) return 'Televisión Local Regional (LTV)';
+
+      return `${medio} - General`;
+    }
+
+    function cargarBaseDesdeGitHub() {
+      const statusBadge = document.getElementById('sync-status-badge');
+      const statusText = document.getElementById('sync-status-text');
+
+      Papa.parse(GITHUB_CSV_URL, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          if (!results.data || results.data.length === 0) {
+            mostrarEstadoError("Archivo vacío");
+            return;
+          }
+
+          try {
+            rawRecords = [];
+            let totalMundialRecords = 0;
+
+            results.data.forEach(row => {
+              const marca = String(findColumnValue(row, /^marcas$/) || findColumnValue(row, /^marca$/) || '').trim();
+              if (!marca) return;
+
+              const invM = parseMoneyToMillions(findColumnValue(row, /inver/));
+              const clasif = String(findColumnValue(row, /clasifi/) || 'Banca Tradicional').trim();
+              const medio = String(findColumnValue(row, /^medio$/) || 'Otros').trim();
+              const tipoMedio = String(findColumnValue(row, /tipo.*medio/) || (medio.toLowerCase().includes('digital') ? 'ON' : 'OFF')).trim().toUpperCase();
+              const mesRaw = String(findColumnValue(row, /^mes/) || '').trim().toLowerCase();
+              const qRaw = String(findColumnValue(row, /^q$/) || findColumnValue(row, /trimestre|quarter/) || '').trim().toUpperCase();
+              const typeRaw = String(findColumnValue(row, /^type$/) || findColumnValue(row, /tipo.*formato|formato/) || 'Otros').trim();
+              const descRaw = String(findColumnValue(row, /^descrip/) || '').trim();
+              const prodRaw = String(findColumnValue(row, /^producto$/) || findColumnValue(row, /^prod$/) || 'Institucional').trim();
+
+              const descNorm = descRaw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+              const isMundial = descNorm.includes('fifa') || descNorm.includes('mundial') || descNorm.includes('world cup');
+
+              if (isMundial) totalMundialRecords++;
+
+              const broadcastChannelName = extractBroadcastChannelName(row, medio, descRaw);
+
+              rawRecords.push({
+                brand: marca,
+                clasif: clasif || 'Banca Tradicional',
+                medio: medio || 'Otros',
+                tipoMedio: tipoMedio.includes('ON') ? 'ON' : 'OFF',
+                type: typeRaw || 'Otros',
+                producto: prodRaw || 'General',
+                canal: broadcastChannelName,
+                desc: descRaw,
+                isMundial: isMundial,
+                mesIdx: MESES_MAP[mesRaw] !== undefined ? MESES_MAP[mesRaw] : -1,
+                q: qRaw.includes('Q1') ? 'Q1' : (qRaw.includes('Q2') ? 'Q2' : (qRaw.includes('Q3') ? 'Q3' : 'Q1')),
+                inv: invM,
+                isClient: marca.toLowerCase().includes('scotiabank')
+              });
+            });
+
+            statusBadge.className = "status-badge";
+            statusBadge.style.backgroundColor = "#ecfdf5";
+            statusBadge.style.borderColor = "#a7f3d0";
+            statusBadge.style.color = "#065f46";
+            statusText.textContent = `Conectado (${rawRecords.length.toLocaleString()} registros)`;
+
+            document.getElementById('mundial-counter').textContent = totalMundialRecords.toLocaleString();
+
+            poblarFiltrosDinamicos();
+            applyFilters();
+          } catch (e) {
+            console.error("Error al procesar el CSV:", e);
+            mostrarEstadoError("Error en estructura");
+          }
+        },
+        error: function(err) {
+          console.error("Error descargando desde GitHub:", err);
+          mostrarEstadoError("Error de conexión");
+        }
       });
     }
 
-    async function loadData() {
-      try {
-        const res = await fetch(EXACT_GITHUB_CSV + '?t=' + new Date().getTime());
-        if (!res.ok) throw new Error("Error HTTP al obtener el archivo: " + res.status);
-        const text = await res.text();
-        const parsedRows = parseCSV(text);
+    function mostrarEstadoError(msg) {
+      const statusBadge = document.getElementById('sync-status-badge');
+      const statusText = document.getElementById('sync-status-text');
+      const statusDot = document.getElementById('sync-dot');
 
-        // Si la primera fila son títulos, la omitimos
-        const dataRows = (parsedRows.length > 0 && String(parsedRows[0][0]).toLowerCase().includes('marca'))
-          ? parsedRows.slice(1)
-          : parsedRows;
-
-        globalRows = dataRows.filter(cols => cols.length >= 2 && cols[0] !== '').map((cols, idx) => {
-          // Busca inteligentemente cuál columna contiene el enlace web
-          const foundUrl = cols.find(c => c.startsWith('http')) || cols[5] || '';
-          const foundType = cols[2] || (foundUrl.toLowerCase().includes('video') ? 'video' : 'image');
-          const media = parseMediaUrl(foundUrl, foundType);
-
-          return {
-            marca: cols[0] || ('Testigo ' + (idx + 1)),
-            campana: cols[1] || 'Campaña Scotiabank',
-            tipo: media.type,
-            formato: cols[3] || 'Digital',
-            fecha: cols[4] || '',
-            estado: cols[6] || 'Verificado',
-            media: media
-          };
-        });
-
-        renderTable(globalRows);
-        updateKPIs(globalRows);
-        document.getElementById('lastUpdated').textContent = `Sincronizado: ${new Date().toLocaleTimeString()} • ${globalRows.length} registros cargados`;
-
-      } catch (err) {
-        console.error(err);
-        document.getElementById('tableBody').innerHTML = `
-          <tr><td colspan="7" style="text-align: center; padding: 30px; color: #dc2626;">
-            ❌ Error al cargar los datos desde GitHub.<br>
-            <span style="font-size:12px; color:#64748b;">Comprueba que el repositorio Scotiabank esté en modo Público.</span>
-          </td></tr>`;
-      }
+      statusBadge.className = "status-badge warning";
+      statusDot.style.backgroundColor = "#f59e0b";
+      statusText.textContent = `Error de conexión (${msg})`;
     }
 
-    function renderTable(dataList) {
-      const tbody = document.getElementById('tableBody');
-      if (dataList.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 24px; color: #64748b;">No se encontraron registros.</td></tr>`;
+    function poblarFiltrosDinamicos() {
+      const classSelect = document.getElementById('classification-filter');
+      classSelect.innerHTML = '<option value="ALL" selected>Todas las Clasificaciones</option>';
+      const clasificaciones = [...new Set(rawRecords.map(r => r.clasif).filter(Boolean))].sort();
+      clasificaciones.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        classSelect.appendChild(opt);
+      });
+
+      const mediaSelect = document.getElementById('media-type-filter');
+      mediaSelect.innerHTML = '<option value="ALL" selected>Todos los canales</option>';
+      const medios = [...new Set(rawRecords.map(r => r.medio).filter(Boolean))].sort();
+      medios.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = m;
+        mediaSelect.appendChild(opt);
+      });
+
+      const typeMediaSelect = document.getElementById('type-media-filter');
+      typeMediaSelect.innerHTML = '<option value="ALL" selected>Todos los medios</option>';
+      medios.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = m;
+        typeMediaSelect.appendChild(opt);
+      });
+
+      const compSelect = document.getElementById('competitor-filter');
+      compSelect.innerHTML = '<option value="ALL" selected>Todas las Marcas</option>';
+      const marcasTotales = {};
+      rawRecords.forEach(r => marcasTotales[r.brand] = (marcasTotales[r.brand] || 0) + r.inv);
+      const marcasOrdenadas = Object.keys(marcasTotales).sort((a, b) => marcasTotales[b] - marcasTotales[a]);
+      marcasOrdenadas.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b;
+        opt.textContent = `${b} ${b.toLowerCase().includes('scotiabank') ? '(Cliente)' : ''}`;
+        compSelect.appendChild(opt);
+      });
+
+      const treemapBrandSelect = document.getElementById('treemap-brand-filter');
+      treemapBrandSelect.innerHTML = '<option value="ALL" selected>Todas las Marcas (Total)</option>';
+      marcasOrdenadas.forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b;
+        opt.textContent = b;
+        treemapBrandSelect.appendChild(opt);
+      });
+    }
+
+    function applyFilters() {
+      if (rawRecords.length === 0) return;
+
+      const selectedQuarter = document.getElementById('quarter-filter').value;
+      const selectedClassification = document.getElementById('classification-filter').value;
+      const selectedMacroMedia = document.getElementById('macro-media-filter').value;
+      const selectedMedia = document.getElementById('media-type-filter').value;
+      const selectedCompetitor = document.getElementById('competitor-filter').value;
+      const selectedTypeMedia = document.getElementById('type-media-filter').value;
+      const selectedBroadcastMedium = document.getElementById('broadcast-medium-selector').value;
+
+      const filtered = rawRecords.filter(r => {
+        if (filterMundialActive && !r.isMundial) return false;
+        if (selectedQuarter !== 'ALL' && r.q !== selectedQuarter) return false;
+        if (selectedClassification !== 'ALL' && r.clasif !== selectedClassification) return false;
+        if (selectedMacroMedia !== 'ALL' && r.tipoMedio !== selectedMacroMedia) return false;
+        if (selectedMedia !== 'ALL' && r.medio !== selectedMedia) return false;
+        if (selectedCompetitor !== 'ALL' && r.brand !== selectedCompetitor) return false;
+        return true;
+      });
+
+      const marcasMap = {};
+      const monthlyTotals = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const clasifTotals = {};
+      const typeTotals = {};
+      const mediaTotals = {};
+      const broadcastChannelTotals = {};
+      let totalON = 0;
+      let totalOFF = 0;
+
+      filtered.forEach(r => {
+        if (!marcasMap[r.brand]) {
+          marcasMap[r.brand] = {
+            brand: r.brand,
+            classification: r.clasif,
+            isClient: r.isClient,
+            q1: 0, q2: 0, q3: 0, total: 0,
+            monthly: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            mediaMix: {}
+          };
+        }
+
+        marcasMap[r.brand].total += r.inv;
+        if (r.q === 'Q1') marcasMap[r.brand].q1 += r.inv;
+        else if (r.q === 'Q2') marcasMap[r.brand].q2 += r.inv;
+        else if (r.q === 'Q3') marcasMap[r.brand].q3 += r.inv;
+
+        marcasMap[r.brand].mediaMix[r.medio] = (marcasMap[r.brand].mediaMix[r.medio] || 0) + r.inv;
+        mediaTotals[r.medio] = (mediaTotals[r.medio] || 0) + r.inv;
+
+        const mNorm = (r.medio || '').trim().toLowerCase();
+        const isRadio = mNorm.includes('radio');
+        const isOTV = mNorm.includes('otv');
+        const isPTV = mNorm.includes('ptv');
+        const isLTV = mNorm.includes('ltv');
+        const isBroadcast = isRadio || isOTV || isPTV || isLTV;
+
+        if (isBroadcast) {
+          let matchesSelector = false;
+          if (selectedBroadcastMedium === 'ALL') matchesSelector = true;
+          else if (selectedBroadcastMedium === 'Radio' && isRadio) matchesSelector = true;
+          else if (selectedBroadcastMedium === 'OTV' && isOTV) matchesSelector = true;
+          else if (selectedBroadcastMedium === 'PTV' && isPTV) matchesSelector = true;
+          else if (selectedBroadcastMedium === 'LTV' && isLTV) matchesSelector = true;
+
+          if (matchesSelector) {
+            const chName = r.canal || `${r.medio} - General`;
+            broadcastChannelTotals[chName] = (broadcastChannelTotals[chName] || 0) + r.inv;
+          }
+        }
+
+        if (r.mesIdx >= 0 && r.mesIdx < 9) {
+          marcasMap[r.brand].monthly[r.mesIdx] += r.inv;
+          monthlyTotals[r.mesIdx] += r.inv;
+        }
+
+        clasifTotals[r.clasif] = (clasifTotals[r.clasif] || 0) + r.inv;
+
+        if (selectedTypeMedia === 'ALL' || r.medio === selectedTypeMedia) {
+          const t = r.type || 'Otros';
+          typeTotals[t] = (typeTotals[t] || 0) + r.inv;
+        }
+
+        if (r.tipoMedio === 'ON') totalON += r.inv;
+        else totalOFF += r.inv;
+      });
+
+      const aggregatedBrands = Object.values(marcasMap).map(b => {
+        let topM = 'N/A';
+        let maxVal = 0;
+        Object.entries(b.mediaMix).forEach(([m, val]) => {
+          if (val > maxVal) {
+            maxVal = val;
+            topM = m;
+          }
+        });
+        b.primaryChannel = topM;
+        return b;
+      }).sort((a, b) => b.total - a.total);
+
+      const grandTotal = aggregatedBrands.reduce((sum, b) => sum + b.total, 0);
+
+      let targetName = 'Scotiabank';
+      let targetType = 'brand';
+
+      if (selectedCompetitor !== 'ALL') {
+        targetName = selectedCompetitor;
+        targetType = 'brand';
+      } else if (selectedClassification !== 'ALL') {
+        targetName = selectedClassification;
+        targetType = 'classification';
+      } else {
+        targetName = 'Scotiabank';
+        targetType = 'brand';
+      }
+
+      const targetRecords = rawRecords.filter(r => {
+        if (filterMundialActive && !r.isMundial) return false;
+        if (targetType === 'brand') {
+          if (r.brand.toLowerCase() !== targetName.toLowerCase() &&
+              !(targetName.toLowerCase() === 'scotiabank' && r.isClient)) {
+            return false;
+          }
+        } else if (targetType === 'classification') {
+          if (r.clasif.toLowerCase() !== targetName.toLowerCase()) return false;
+        }
+        if (selectedMacroMedia !== 'ALL' && r.tipoMedio !== selectedMacroMedia) return false;
+        if (selectedMedia !== 'ALL' && r.medio !== selectedMedia) return false;
+        return true;
+      });
+
+      const targetQ1 = targetRecords.filter(r => r.q === 'Q1').reduce((s, r) => s + r.inv, 0);
+      const targetQ2 = targetRecords.filter(r => r.q === 'Q2').reduce((s, r) => s + r.inv, 0);
+      const targetQ3 = targetRecords.filter(r => r.q === 'Q3').reduce((s, r) => s + r.inv, 0);
+
+      // MANTENER LA ETIQUETA EN: Variación Q
+      document.getElementById('kpi-title-1').textContent = `Variación Q`;
+
+      const kpiValEl = document.getElementById('kpi-scotiabank-val');
+      const kpiSubEl = document.getElementById('kpi-scotia-share');
+
+      let varText = "-";
+      let varClass = "neutral";
+      let subDesc = "";
+
+      if (selectedQuarter === 'Q2') {
+        if (targetQ1 > 0) {
+          const varPct = Math.round(((targetQ2 - targetQ1) / targetQ1) * 100);
+          varText = `${varPct >= 0 ? '+' : ''}${varPct}%`;
+          varClass = varPct >= 0 ? 'positive' : 'negative';
+          subDesc = `Q2 ($${formatMillions(targetQ2)}M) vs Q1 ($${formatMillions(targetQ1)}M)`;
+        } else {
+          varText = targetQ2 > 0 ? "+100%" : "0%";
+          varClass = targetQ2 > 0 ? 'positive' : 'neutral';
+          subDesc = `Q2: $${formatMillions(targetQ2)}M (Sin pauta en Q1)`;
+        }
+      } else if (selectedQuarter === 'Q3') {
+        if (targetQ2 > 0) {
+          const varPct = Math.round(((targetQ3 - targetQ2) / targetQ2) * 100);
+          varText = `${varPct >= 0 ? '+' : ''}${varPct}%`;
+          varClass = varPct >= 0 ? 'positive' : 'negative';
+          subDesc = `Q3 ($${formatMillions(targetQ3)}M) vs Q2 ($${formatMillions(targetQ2)}M)`;
+        } else {
+          varText = targetQ3 > 0 ? "+100%" : "0%";
+          varClass = targetQ3 > 0 ? 'positive' : 'neutral';
+          subDesc = `Q3: $${formatMillions(targetQ3)}M (Sin pauta en Q2)`;
+        }
+      } else if (selectedQuarter === 'Q1') {
+        varText = `Base Q1`;
+        varClass = "neutral";
+        subDesc = `Inversión: $${formatMillions(targetQ1)}M (Inicio de periodo)`;
+      } else {
+        if (targetQ2 > 0) {
+          const varPct = Math.round(((targetQ3 - targetQ2) / targetQ2) * 100);
+          varText = `${varPct >= 0 ? '+' : ''}${varPct}%`;
+          varClass = varPct >= 0 ? 'positive' : 'negative';
+          subDesc = `Q3 vs Q2 | YTD: $${formatMillions(targetQ1 + targetQ2 + targetQ3)}M`;
+        } else if (targetQ1 > 0) {
+          const varPct = Math.round(((targetQ2 - targetQ1) / targetQ1) * 100);
+          varText = `${varPct >= 0 ? '+' : ''}${varPct}%`;
+          varClass = varPct >= 0 ? 'positive' : 'negative';
+          subDesc = `Q2 vs Q1 | YTD: $${formatMillions(targetQ1 + targetQ2 + targetQ3)}M`;
+        } else {
+          varText = "0%";
+          varClass = "neutral";
+          subDesc = `Total YTD: $${formatMillions(targetQ1 + targetQ2 + targetQ3)}M`;
+        }
+      }
+
+      kpiValEl.textContent = varText;
+      kpiValEl.style.color = varClass === 'positive' ? '#059669' : (varClass === 'negative' ? '#dc2626' : '#0f172a');
+      kpiSubEl.className = `metric-diff ${varClass}`;
+      kpiSubEl.textContent = subDesc;
+
+      document.getElementById('kpi-total-val').textContent = `$${formatMillions(grandTotal)}M`;
+
+      if (aggregatedBrands.length > 0) {
+        const leader = aggregatedBrands[0];
+        const leaderSoi = grandTotal > 0 ? Math.round((leader.total / grandTotal) * 100) : 0;
+        document.getElementById('kpi-leader-name').textContent = leader.brand;
+        document.getElementById('kpi-leader-share').textContent = `$${formatMillions(leader.total)}M (${leaderSoi}% SOI)`;
+      } else {
+        document.getElementById('kpi-leader-name').textContent = '-';
+        document.getElementById('kpi-leader-share').textContent = '$0.0M (0% SOI)';
+      }
+
+      const sumMacro = totalON + totalOFF;
+      if (sumMacro > 0) {
+        const pctON = Math.round((totalON / sumMacro) * 100);
+        const pctOFF = 100 - pctON;
+        document.getElementById('kpi-mix-ratio').textContent = `${pctON}% / ${pctOFF}%`;
+        document.getElementById('kpi-mix-sub').textContent = pctON >= pctOFF ? 'Dominio ON' : 'Dominio OFF';
+      } else {
+        document.getElementById('kpi-mix-ratio').textContent = '- / -';
+        document.getElementById('kpi-mix-sub').textContent = 'Sin pauta en el filtro';
+      }
+
+      if (filterMundialActive) {
+        document.getElementById('strategic-insights-text').textContent =
+          `⚡ Filtro Activo: Actividad Mundial (FIFA / Copa Mundial). Mostrando únicamente pautas con menciones a FIFA o Mundial en la columna Descripción. Inversión total en esta temática: $${formatMillions(grandTotal)}M MXN, liderada por ${aggregatedBrands[0] ? aggregatedBrands[0].brand : 'N/A'}.`;
+      } else {
+        document.getElementById('strategic-insights-text').textContent =
+          `Con los filtros seleccionados, el mercado totaliza $${formatMillions(grandTotal)}M MXN. La evolución de inversión de ${targetName} registra una variación de ${varText} (${subDesc}). El mix de medios registra ${sumMacro > 0 ? Math.round((totalON / sumMacro) * 100) : 0}% en medios ON frente al ${sumMacro > 0 ? Math.round((totalOFF / sumMacro) * 100) : 0}% en medios OFF.`;
+      }
+
+      const top3Brands = aggregatedBrands.slice(0, 3).map(b => `${b.brand} ($${formatMillions(b.total)}M)`).join(', ');
+      const scotiaItem = aggregatedBrands.find(b => b.isClient);
+      const scotiaPosition = aggregatedBrands.findIndex(b => b.isClient) + 1;
+
+      const mesesNombres = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre'];
+      let maxMonthVal = 0;
+      let maxMonthIdx = 0;
+      monthlyTotals.forEach((val, idx) => {
+        if (val > maxMonthVal) {
+          maxMonthVal = val;
+          maxMonthIdx = idx;
+        }
+      });
+      const topMesNombre = mesesNombres[maxMonthIdx];
+      const banamex = aggregatedBrands.find(b => b.brand.toLowerCase().includes('banamex'));
+      const plata = aggregatedBrands.find(b => b.brand.toLowerCase().includes('plata'));
+
+      let dynamicTrendInsight = `El ranking de inversión lo encabezan ${top3Brands || 'los competidores líderes'}. `;
+      dynamicTrendInsight += `A nivel temporal, <strong>${topMesNombre}</strong> registró el mayor volumen de pauta publicitaria acumulada ($${formatMillions(maxMonthVal)}M MXN). `;
+      if (banamex && plata) {
+        dynamicTrendInsight += `Se observan picos agresivos de <strong>Banamex</strong> en marzo y julio (superando los $140M mensuales), mientras que jugadores de Fintech como <strong>Plata</strong> y <strong>Mercado Pago</strong> aceleraron su curva hacia Q2 y Q3. `;
+      }
+      if (scotiaItem) {
+        dynamicTrendInsight += `<strong>Scotiabank</strong> se posiciona en el lugar #${scotiaPosition} del ranking con una pauta estratégica y sostenida a lo largo de los trimestres.`;
+      }
+      document.getElementById('competitor-trend-insights-text').innerHTML = dynamicTrendInsight;
+
+      const sortedMedios = Object.entries(mediaTotals).sort((a, b) => b[1] - a[1]);
+      const topMedio1 = sortedMedios[0] ? `${sortedMedios[0][0]} (${grandTotal > 0 ? Math.round((sortedMedios[0][1] / grandTotal) * 100) : 0}%)` : 'OTV';
+      const topMedio2 = sortedMedios[1] ? `${sortedMedios[1][0]} (${grandTotal > 0 ? Math.round((sortedMedios[1][1] / grandTotal) * 100) : 0}%)` : 'Digital';
+
+      const sortedTypes = Object.entries(typeTotals).sort((a, b) => b[1] - a[1]);
+      const topType1 = sortedTypes[0] ? `${sortedTypes[0][0]}` : 'SPOT REGULAR';
+      const topType1Pct = sortedTypes[0] && grandTotal > 0 ? Math.round((sortedTypes[0][1] / grandTotal) * 100) : 28;
+
+      const sortedChannels = Object.entries(broadcastChannelTotals).sort((a, b) => b[1] - a[1]);
+      const topChannelName = sortedChannels[0] ? sortedChannels[0][0] : 'TV Abierta / Emisoras Principales';
+      const totalBroadcastVal = sortedChannels.reduce((sum, item) => sum + item[1], 0);
+      const topChannelPct = (sortedChannels[0] && totalBroadcastVal > 0) ? Math.round((sortedChannels[0][1] / totalBroadcastVal) * 100) : 0;
+
+      const productCounts = {};
+      filtered.forEach(r => {
+        if (r.producto && r.producto.toLowerCase() !== 'general') {
+          productCounts[r.producto] = (productCounts[r.producto] || 0) + 1;
+        }
+      });
+      const topProductsSorted = Object.entries(productCounts).sort((a, b) => b[1] - a[1]).slice(0, 3).map(p => p[0]);
+      const topProductsListText = topProductsSorted.length > 0 ? topProductsSorted.join(', ') : 'Institucional, Tarjetas y Créditos';
+
+      let mediaTypeInsight = `A nivel de canales macro, la inversión publicitaria se concentra prioritariamente en <strong>${topMedio1}</strong> y <strong>${topMedio2}</strong>, apalancándose de formatos como <strong>${topType1}</strong> (${topType1Pct}% de la pauta). `;
+      mediaTypeInsight += `En medios audiovisuales (Radio, OTV, PTV, LTV), el vehículo con mayor concentración de pauta es <strong>${topChannelName}</strong> (${topChannelPct}% del total audiovisual analizado). `;
+      mediaTypeInsight += `Por su parte, el análisis de portafolio en el <strong>Treemap</strong> refleja una diversificación activa donde productos como <strong>${topProductsListText}</strong> mantienen la mayor frecuencia de comunicación entre las marcas competidoras, permitiendo contrastar de forma directa la estrategia de producto de <strong>Scotiabank</strong> frente al mercado.`;
+
+      document.getElementById('media-type-insights-text').innerHTML = mediaTypeInsight;
+
+      renderClassificationChart(clasifTotals, grandTotal);
+      renderBrandSoiChart(aggregatedBrands, grandTotal);
+      renderTopCompetitorsChart(aggregatedBrands);
+      renderMonthlyTrendChart(aggregatedBrands, monthlyTotals);
+      renderMediaMixChart(aggregatedBrands);
+      renderBroadcastDetailChart(broadcastChannelTotals, selectedBroadcastMedium);
+      renderTypeChart(typeTotals, grandTotal, selectedTypeMedia);
+      renderTable(aggregatedBrands, grandTotal);
+
+      renderNativeTreemap(filtered);
+    }
+
+    function squarifyLayout(data, x, y, width, height) {
+      if (!data || data.length === 0 || width <= 0 || height <= 0) return [];
+      const items = data.filter(d => d.value > 0).sort((a, b) => b.value - a.value);
+      if (items.length === 0) return [];
+
+      const totalVal = items.reduce((s, d) => s + d.value, 0);
+      const totalArea = width * height;
+      const areas = items.map(d => ({ ...d, _area: (d.value / totalVal) * totalArea }));
+      const results = [];
+
+      const worstRatio = (row, w) => {
+        if (row.length === 0 || w <= 0) return Infinity;
+        let minA = Infinity, maxA = 0, sumA = 0;
+        for (let i = 0; i < row.length; i++) {
+          const a = row[i]._area;
+          if (a < minA) minA = a;
+          if (a > maxA) maxA = a;
+          sumA += a;
+        }
+        const w2 = w * w;
+        const sum2 = sumA * sumA;
+        return Math.max((w2 * maxA) / sum2, sum2 / (w2 * minA));
+      };
+
+      const layoutRow = (row, rect) => {
+        const sumA = row.reduce((s, i) => s + i._area, 0);
+        if (rect.width >= rect.height) {
+          const rowW = sumA / rect.height;
+          let curY = rect.y;
+          for (let i = 0; i < row.length; i++) {
+            const itemH = row[i]._area / rowW;
+            results.push({ ...row[i], x: rect.x, y: curY, width: rowW, height: itemH });
+            curY += itemH;
+          }
+          return { x: rect.x + rowW, y: rect.y, width: Math.max(0, rect.width - rowW), height: rect.height };
+        } else {
+          const rowH = sumA / rect.width;
+          let curX = rect.x;
+          for (let i = 0; i < row.length; i++) {
+            const itemW = row[i]._area / rowH;
+            results.push({ ...row[i], x: curX, y: rect.y, width: itemW, height: rowH });
+            curX += itemW;
+          }
+          return { x: rect.x, y: rect.y + rowH, width: rect.width, height: Math.max(0, rect.height - rowH) };
+        }
+      };
+
+      let curRect = { x, y, width, height };
+      let curRow = [];
+
+      for (let i = 0; i < areas.length; i++) {
+        const item = areas[i];
+        const w = Math.max(0, Math.min(curRect.width, curRect.height));
+        const ratioWith = worstRatio([...curRow, item], w);
+        const ratioWithout = worstRatio(curRow, w);
+
+        if (curRow.length === 0 || ratioWith <= ratioWithout) {
+          curRow.push(item);
+        } else {
+          curRect = layoutRow(curRow, curRect);
+          curRow = [item];
+        }
+      }
+      if (curRow.length > 0) layoutRow(curRow, curRect);
+      return results;
+    }
+
+    function renderNativeTreemap(records) {
+      const canvas = document.getElementById('treemapCanvas');
+      const container = document.getElementById('treemapContainer');
+      if (!canvas || !container) return;
+
+      const rect = container.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const w = rect.width || 1150;
+      const h = 420;
+
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const selBrand = document.getElementById('treemap-brand-filter').value;
+      let filtered = records;
+      if (selBrand !== 'ALL') {
+        filtered = records.filter(r => r.brand === selBrand);
+      }
+
+      const counts = {};
+      filtered.forEach(r => {
+        const b = r.brand || 'Otros';
+        const p = r.producto || 'Institucional';
+        const key = `${b}|||${p}`;
+        counts[key] = (counts[key] || 0) + 1;
+      });
+
+      const items = Object.entries(counts).map(([k, c]) => {
+        const [brand, producto] = k.split('|||');
+        return {
+          brand: brand,
+          producto: producto,
+          value: c
+        };
+      });
+
+      if (items.length === 0) {
+        ctx.fillStyle = "#64748b";
+        ctx.font = "14px -apple-system, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Sin datos de producto para el filtro seleccionado", w / 2, h / 2);
+        computedTreemapBoxes = [];
         return;
       }
 
-      tbody.innerHTML = dataList.map(row => `
-        <tr>
-          <td>
-            <div class="thumb-wrapper" onclick="openModal('${row.tipo}', '${row.marca}', '${row.media.viewUrl}', '${row.media.originalUrl}')">
-              <img src="${row.media.thumbUrl}" alt="${row.marca}" onerror="this.src='https://placehold.co/80x52?text=Sin+Foto'">
-              ${row.tipo === 'video' ? '<div class="play-overlay">▶</div>' : ''}
-            </div>
-            <span class="format-tag ${row.tipo === 'video' ? 'format-video' : 'format-image'}">
-              ${row.tipo === 'video' ? '🎬 Video' : '🖼️ Imagen'}
-            </span>
-          </td>
-          <td><strong>${row.marca}</strong></td>
-          <td>${row.campana}</td>
-          <td>${row.formato}</td>
-          <td>${row.fecha}</td>
-          <td><span class="badge-status">${row.estado}</span></td>
-          <td><a class="btn-link" href="${row.media.originalUrl}" target="_blank">Abrir ↗</a></td>
-        </tr>
-      `).join('');
+      const brandColorsMap = {
+        'Scotiabank': '#ec111a',
+        'Banamex': '#0284c7',
+        'BBVA': '#004481',
+        'Azteca': '#10b981',
+        'Santander': '#e11d48',
+        'Mercado Pago': '#0369a1',
+        'Nu': '#8b5cf6',
+        'Banorte': '#ea580c',
+        'BanCoppel': '#ca8a04',
+        'Clip': '#f59e0b',
+        'Kueski': '#14b8a6'
+      };
+      const fallbackPalette = ['#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2', '#4f46e5', '#be123c'];
+
+      const boxes = squarifyLayout(items, 0, 0, w, h);
+      computedTreemapBoxes = boxes;
+
+      ctx.clearRect(0, 0, w, h);
+
+      boxes.forEach(box => {
+        const color = brandColorsMap[box.brand] || fallbackPalette[Math.abs(box.brand.length) % fallbackPalette.length];
+        
+        ctx.fillStyle = color;
+        ctx.fillRect(box.x, box.y, box.width, box.height);
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(box.x, box.y, box.width, box.height);
+
+        if (box.width > 55 && box.height > 25) {
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'top';
+
+          ctx.font = 'bold 11px -apple-system, sans-serif';
+          const maxTextW = box.width - 12;
+          
+          let prodText = box.producto;
+          if (ctx.measureText(prodText).width > maxTextW) {
+            prodText = prodText.substring(0, Math.floor(maxTextW / 7)) + '...';
+          }
+          ctx.fillText(prodText, box.x + 6, box.y + 6);
+
+          if (box.height > 44 && selBrand === 'ALL') {
+            ctx.font = '500 10px -apple-system, sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+            ctx.fillText(box.brand, box.x + 6, box.y + 22);
+          }
+        }
+      });
     }
 
-    function updateKPIs(dataList) {
-      document.getElementById('kpiTotal').textContent = dataList.length;
-      document.getElementById('kpiImages').textContent = dataList.filter(d => d.tipo === 'image').length;
-      document.getElementById('kpiVideos').textContent = dataList.filter(d => d.tipo === 'video').length;
+    function setupTreemapInteractions() {
+      const container = document.getElementById('treemapContainer');
+      const tooltip = document.getElementById('treemapTooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const hit = computedTreemapBoxes.find(b => 
+          mouseX >= b.x && mouseX <= b.x + b.width &&
+          mouseY >= b.y && mouseY <= b.y + b.height
+        );
+
+        if (hit) {
+          tooltip.style.display = 'block';
+          tooltip.innerHTML = `Marca: ${hit.brand} &nbsp;|&nbsp; Producto: ${hit.producto}`;
+          tooltip.style.left = `${Math.min(mouseX + 14, rect.width - 220)}px`;
+          tooltip.style.top = `${Math.max(mouseY - 32, 10)}px`;
+        } else {
+          tooltip.style.display = 'none';
+        }
+      });
+
+      container.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+      });
     }
 
-    function openModal(type, title, viewUrl, originalUrl) {
-      document.getElementById('modalTitle').textContent = 'Testigo: ' + title;
-      document.getElementById('modalExternalLink').href = originalUrl;
-      const container = document.getElementById('modalContainer');
-      container.innerHTML = '';
+    function resetAllFilters() {
+      document.getElementById('quarter-filter').value = 'ALL';
+      document.getElementById('classification-filter').value = 'ALL';
+      document.getElementById('macro-media-filter').value = 'ALL';
+      document.getElementById('media-type-filter').value = 'ALL';
+      document.getElementById('competitor-filter').value = 'ALL';
+      document.getElementById('type-media-filter').value = 'ALL';
+      document.getElementById('broadcast-medium-selector').value = 'ALL';
+      document.getElementById('treemap-brand-filter').value = 'ALL';
 
-      if (type === 'video') {
-        const iframe = document.createElement('iframe');
-        iframe.src = viewUrl;
-        iframe.style.width = '100%';
-        iframe.style.height = '460px';
-        iframe.style.border = 'none';
-        iframe.allow = 'autoplay; fullscreen';
-        container.appendChild(iframe);
-      } else {
-        const img = document.createElement('img');
-        img.src = viewUrl;
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '65vh';
-        img.style.objectFit = 'contain';
-        container.appendChild(img);
+      filterMundialActive = false;
+      const btnMundial = document.getElementById('btn-mundial-filter');
+      btnMundial.classList.remove('active');
+
+      applyFilters();
+    }
+
+    function renderClassificationChart(clasifTotals, grandTotal) {
+      const ctx = document.getElementById('classificationChart').getContext('2d');
+      const classes = Object.keys(clasifTotals);
+      const values = classes.map(c => clasifTotals[c]);
+      const colors = classes.map(c => obtenerColorClasificacion(c));
+
+      const labelsWithPct = classes.map((c, idx) => {
+        const pct = grandTotal > 0 ? Math.round((values[idx] / grandTotal) * 100) : 0;
+        return `${c} (${pct}%)`;
+      });
+
+      if (classificationChartInstance) classificationChartInstance.destroy();
+
+      classificationChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labelsWithPct,
+          datasets: [{
+            data: values,
+            backgroundColor: colors,
+            borderWidth: 2,
+            borderColor: '#ffffff'
+          }]
+        },
+        plugins: [insideDoughnutPercentPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12, weight: '600' }, padding: 14 } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const val = ctx.raw;
+                  const pct = grandTotal > 0 ? Math.round((val / grandTotal) * 100) : 0;
+                  return ` ${ctx.label.split(' (')[0]}: $${formatMillions(val)}M (${pct}%)`;
+                }
+              }
+            }
+          },
+          cutout: '58%'
+        }
+      });
+    }
+
+    function renderBrandSoiChart(brands, grandTotal) {
+      const ctx = document.getElementById('brandSoiChart').getContext('2d');
+      const top6 = brands.slice(0, 6);
+      const others = brands.slice(6);
+      const othersTotal = others.reduce((sum, b) => sum + b.total, 0);
+
+      const chartItems = [...top6];
+      if (othersTotal > 0) {
+        chartItems.push({ brand: 'Otras Marcas', total: othersTotal, isClient: false });
       }
-      document.getElementById('mediaModal').classList.add('active');
+
+      const palette = ['#004481', '#138808', '#0284c7', '#eb1c24', '#7c3aed', '#ec111a', '#64748b', '#f59e0b'];
+      const backgroundColors = chartItems.map((b, idx) => {
+        if (b.isClient) return '#ec111a';
+        if (b.brand === 'Otras Marcas') return '#cbd5e1';
+        return palette[idx % palette.length];
+      });
+
+      const labelsWithPct = chartItems.map(b => {
+        const pct = grandTotal > 0 ? Math.round((b.total / grandTotal) * 100) : 0;
+        return `${b.brand} (${pct}%)`;
+      });
+
+      if (brandSoiChartInstance) brandSoiChartInstance.destroy();
+
+      brandSoiChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labelsWithPct,
+          datasets: [{
+            data: chartItems.map(b => b.total),
+            backgroundColor: backgroundColors,
+            borderWidth: 2,
+            borderColor: '#ffffff'
+          }]
+        },
+        plugins: [insideDoughnutPercentPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11, weight: '600' }, padding: 12 } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const val = ctx.raw;
+                  const pct = grandTotal > 0 ? Math.round((val / grandTotal) * 100) : 0;
+                  return ` ${ctx.label.split(' (')[0]}: $${formatMillions(val)}M (${pct}% SOI)`;
+                }
+              }
+            }
+          },
+          cutout: '58%'
+        }
+      });
     }
 
-    function closeModal() {
-      document.getElementById('modalContainer').innerHTML = '';
-      document.getElementById('mediaModal').classList.remove('active');
+    function renderTopCompetitorsChart(brands) {
+      const ctx = document.getElementById('topCompetitorsChart').getContext('2d');
+      const top10 = brands.slice(0, 10);
+      const barColors = top10.map(b => obtenerColorClasificacion(b.classification));
+
+      if (topCompetitorsChartInstance) topCompetitorsChartInstance.destroy();
+
+      topCompetitorsChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: top10.map(b => b.brand),
+          datasets: [{
+            data: top10.map(b => b.total),
+            backgroundColor: barColors,
+            borderRadius: 4,
+            barThickness: 15
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const b = top10[ctx.dataIndex];
+                  return ` $${formatMillions(ctx.raw)}M MXN (${b.classification})`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              ticks: { callback: v => `$${formatMillions(v)}M` },
+              grid: { color: '#f1f5f9' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 12, weight: '500' }, color: '#334155' }
+            }
+          }
+        }
+      });
     }
 
-    document.getElementById('searchInput').addEventListener('keyup', (e) => {
-      const term = e.target.value.toLowerCase();
-      const filtered = globalRows.filter(r => 
-        (r.marca && String(r.marca).toLowerCase().includes(term)) ||
-        (r.campana && String(r.campana).toLowerCase().includes(term)) ||
-        (r.formato && String(r.formato).toLowerCase().includes(term))
-      );
-      renderTable(filtered);
+    function renderMonthlyTrendChart(brands, monthlyTotals) {
+      const ctx = document.getElementById('monthlyTrendChart').getContext('2d');
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep'];
+
+      if (monthlyTrendChartInstance) monthlyTrendChartInstance.destroy();
+
+      if (trendViewMode === 'TOTAL') {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(236, 17, 26, 0.18)');
+        gradient.addColorStop(1, 'rgba(236, 17, 26, 0.01)');
+
+        monthlyTrendChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: [{
+              label: 'Inversión Total Mercado',
+              data: monthlyTotals,
+              borderColor: '#ec111a',
+              borderWidth: 2.5,
+              fill: true,
+              backgroundColor: gradient,
+              tension: 0.35,
+              pointBackgroundColor: '#ec111a',
+              pointBorderColor: '#ffffff',
+              pointBorderWidth: 2,
+              pointRadius: 4.5,
+              pointHoverRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: ctx => ` Total Mercado: $${formatMillions(ctx.raw)}M` } }
+            },
+            scales: {
+              x: { grid: { display: false } },
+              y: {
+                beginAtZero: true,
+                ticks: { callback: v => `$${formatMillions(v)}M` },
+                grid: { color: '#f1f5f9' }
+              }
+            }
+          }
+        });
+      } else {
+        let targetBrands = brands.slice(0, 6);
+        const scotiaBrand = brands.find(b => b.isClient);
+        if (scotiaBrand && !targetBrands.some(b => b.isClient)) {
+          targetBrands.push(scotiaBrand);
+        }
+
+        const brandLineColors = {
+          'Scotiabank': '#ec111a',
+          'Banamex': '#056dae',
+          'BBVA': '#004481',
+          'Azteca': '#10b981',
+          'Santander': '#e11d48',
+          'Mercado Pago': '#0284c7',
+          'Nu': '#8b5cf6',
+          'Banorte': '#ea580c',
+          'BanCoppel': '#ca8a04',
+          'Clip': '#f59e0b',
+          'Kueski': '#14b8a6'
+        };
+
+        const fallbackColors = ['#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2', '#4f46e5'];
+
+        const datasets = targetBrands.map((b, idx) => {
+          const isScotia = b.isClient || b.brand.toLowerCase().includes('scotiabank');
+          const lineColor = isScotia ? '#ec111a' : (brandLineColors[b.brand] || fallbackColors[idx % fallbackColors.length]);
+
+          return {
+            label: b.brand + (isScotia ? ' (Cliente)' : ''),
+            data: b.monthly,
+            borderColor: lineColor,
+            backgroundColor: lineColor,
+            borderWidth: isScotia ? 3.5 : 2,
+            tension: 0.35,
+            fill: false,
+            pointBackgroundColor: lineColor,
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 1.5,
+            pointRadius: isScotia ? 4.5 : 3.5,
+            pointHoverRadius: 6
+          };
+        });
+
+        monthlyTrendChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: datasets
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { boxWidth: 10, font: { size: 10.5, weight: '600' }, padding: 8 }
+              },
+              tooltip: {
+                callbacks: { label: ctx => ` ${ctx.dataset.label}: $${formatMillions(ctx.raw)}M` }
+              }
+            },
+            scales: {
+              x: { grid: { display: false } },
+              y: {
+                beginAtZero: true,
+                ticks: { callback: v => `$${formatMillions(v)}M` },
+                grid: { color: '#f1f5f9' }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    function renderMediaMixChart(brands) {
+      const ctx = document.getElementById('mediaMixChart').getContext('2d');
+      const top8 = brands.slice(0, 8);
+
+      const allMedios = new Set();
+      top8.forEach(b => Object.keys(b.mediaMix).forEach(m => allMedios.add(m)));
+      const categories = [...allMedios];
+      const colors = ['#ec111a', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#ec4899', '#06b6d4', '#94a3b8', '#64748b'];
+
+      const datasets = categories.map((cat, idx) => {
+        const rawData = top8.map(b => b.mediaMix[cat] || 0);
+        const processedData = rawData.map((val, bIdx) => {
+          if (mediaMixViewMode === 'PCT') {
+            const bTotal = top8[bIdx].total;
+            return bTotal > 0 ? (val / bTotal) * 100 : 0;
+          }
+          return val;
+        });
+
+        return {
+          label: cat,
+          data: processedData,
+          rawDollars: rawData,
+          backgroundColor: colors[idx % colors.length]
+        };
+      });
+
+      if (mediaMixChartInstance) mediaMixChartInstance.destroy();
+
+      mediaMixChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: top8.map(b => b.brand),
+          datasets: datasets
+        },
+        plugins: [insideStackedMediaPercentPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'nearest', intersect: true },
+          scales: {
+            x: { stacked: true, grid: { display: false } },
+            y: {
+              stacked: true,
+              beginAtZero: true,
+              max: mediaMixViewMode === 'PCT' ? 100 : undefined,
+              ticks: {
+                callback: v => mediaMixViewMode === 'PCT' ? `${v}%` : `$${formatMillions(v)}M`
+              },
+              grid: { color: '#f1f5f9' }
+            }
+          },
+          plugins: {
+            legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const ds = ctx.dataset;
+                  const bIdx = ctx.dataIndex;
+                  const bTotal = top8[bIdx].total;
+                  const valDollar = ds.rawDollars ? ds.rawDollars[bIdx] : ctx.raw;
+                  const shareBrand = bTotal > 0 ? ((valDollar / bTotal) * 100).toFixed(1) : '0';
+                  return ` ${ds.label}: $${formatMillions(valDollar)}M (${shareBrand}% de la pauta de ${top8[bIdx].brand})`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderBroadcastDetailChart(broadcastTotals, selectedMedium) {
+      const ctx = document.getElementById('broadcastDetailChart').getContext('2d');
+      const sortedChannels = Object.entries(broadcastTotals)
+        .map(([name, total]) => ({ name, total }))
+        .sort((a, b) => b.total - a.total)
+        .slice(0, 10);
+
+      const labels = sortedChannels.map(c => c.name);
+      const values = sortedChannels.map(c => c.total);
+      const totalBroadcastFiltered = values.reduce((a, b) => a + b, 0);
+
+      let colorPalette = [
+        '#004481', '#1e3a8a', '#2563eb', '#0284c7', '#0369a1',
+        '#0284c7', '#0d9488', '#059669', '#10b981', '#f59e0b'
+      ];
+
+      if (selectedMedium === 'Radio') {
+        colorPalette = [
+          '#0284c7', '#0369a1', '#075985', '#0c4a6e', '#0ea5e9',
+          '#38bdf8', '#06b6d4', '#0891b2', '#0d9488', '#14b8a6'
+        ];
+      } else if (selectedMedium === 'OTV') {
+        colorPalette = [
+          '#ec111a', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d',
+          '#e11d48', '#be123c', '#9f1239', '#f43f5e', '#fb7185'
+        ];
+      }
+
+      if (broadcastDetailChartInstance) broadcastDetailChartInstance.destroy();
+
+      broadcastDetailChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels.length > 0 ? labels : ['Sin datos'],
+          datasets: [{
+            data: values.length > 0 ? values : [0],
+            backgroundColor: colorPalette.slice(0, Math.max(sortedChannels.length, 1)),
+            borderRadius: 5,
+            barPercentage: 0.65,
+            categoryPercentage: 0.8
+          }]
+        },
+        plugins: [insideVerticalBarPercentPlugin],
+        options: {
+          indexAxis: 'x',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const val = ctx.raw;
+                  const pct = totalBroadcastFiltered > 0 ? ((val / totalBroadcastFiltered) * 100).toFixed(1) : 0;
+                  const medTxt = selectedMedium === 'ALL' ? 'medios audiovisuales' : selectedMedium;
+                  return ` Inversión: $${formatMillions(val)}M MXN (${pct}% de ${medTxt})`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 11, weight: '600' }, color: '#334155', maxRotation: 25, minRotation: 0 }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { callback: v => `$${formatMillions(v)}M` },
+              grid: { color: '#f1f5f9' }
+            }
+          }
+        }
+      });
+    }
+
+    function renderTypeChart(typeTotals, grandTotal, currentSelectedMedia) {
+      const ctx = document.getElementById('typeChart').getContext('2d');
+      const sortedTypes = Object.entries(typeTotals)
+        .map(([name, total]) => ({ name, total }))
+        .sort((a, b) => b.total - a.total)
+        .slice(0, 10);
+
+      const labels = sortedTypes.map(t => t.name);
+      const values = sortedTypes.map(t => t.total);
+      const totalTypeFiltered = values.reduce((a, b) => a + b, 0);
+
+      const typePalette = [
+        '#004481', '#1e3a8a', '#2563eb', '#3b82f6', '#0284c7',
+        '#06b6d4', '#0d9488', '#10b981', '#64748b', '#94a3b8'
+      ];
+
+      if (typeChartInstance) typeChartInstance.destroy();
+
+      typeChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: typePalette.slice(0, sortedTypes.length),
+            borderRadius: 4,
+            barThickness: 16
+          }]
+        },
+        plugins: [insideBarPercentPlugin],
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const val = ctx.raw;
+                  const pct = totalTypeFiltered > 0 ? ((val / totalTypeFiltered) * 100).toFixed(1) : 0;
+                  return ` Inversión: $${formatMillions(val)}M MXN (${pct}% de este medio)`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              ticks: { callback: v => `$${formatMillions(v)}M` },
+              grid: { color: '#f1f5f9' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 11.5, weight: '600' }, color: '#334155' }
+            }
+          }
+        }
+      });
+    }
+
+    function renderTable(brands, grandTotal) {
+      const tbody = document.getElementById('table-body');
+      tbody.innerHTML = '';
+
+      brands.forEach(item => {
+        const soi = grandTotal > 0 ? Math.round((item.total / grandTotal) * 100) : 0;
+        const row = document.createElement('tr');
+        if (item.isClient) row.classList.add('target-client');
+
+        row.innerHTML = `
+          <td>
+            <div class="brand-cell">
+              <span class="indicator-dot" style="background-color: ${obtenerColorClasificacion(item.classification)};"></span>
+              ${item.brand} ${item.isClient ? '(Cliente)' : ''}
+            </div>
+          </td>
+          <td>${item.classification}</td>
+          <td>$${formatMillions(item.q1)}M</td>
+          <td>$${formatMillions(item.q2)}M</td>
+          <td>$${formatMillions(item.q3)}M</td>
+          <td><strong>$${formatMillions(item.total)}M</strong></td>
+          <td><strong>${soi}%</strong></td>
+          <td>${item.primaryChannel}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function tryLoadTestigos(urlIndex) {
+      if (urlIndex >= TESTIGOS_URLS.length) {
+        console.warn("No se pudo cargar el archivo remoto de testigos, usando muestra local.");
+        setupTestigos();
+        return;
+      }
+
+      const targetUrl = TESTIGOS_URLS[urlIndex];
+      const counterEl = document.getElementById('t-counter');
+      if (counterEl) counterEl.textContent = "Conectando a base de testigos...";
+
+      Papa.parse(targetUrl, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          if (!results.data || results.data.length === 0) {
+            tryLoadTestigos(urlIndex + 1);
+            return;
+          }
+
+          rawTestigos = results.data.filter(row => {
+            return (row["Marcas"] || row["Testigo"] || row["Medio Ok"] || row["Medio"] || row["Marca"]);
+          }).map(row => {
+            return {
+              "Año": row["Año"] || row["Ano"] || "2026",
+              "Q": row["Q"] || "Q1",
+              "Medio Ok": row["Medio Ok"] || row["Medio"] || "Otros",
+              "Marcas": row["Marcas"] || row["Marca"] || "",
+              "Producto": row["Producto"] || "",
+              "Canal": row["Canal"] || "",
+              "Duración": row["Duración"] || row["Duracion"] || "0",
+              "Testigo": row["Testigo"] || row["URL"] || row["Enlace"] || ""
+            };
+          });
+
+          setupTestigos();
+        },
+        error: function() {
+          tryLoadTestigos(urlIndex + 1);
+        }
+      });
+    }
+
+    function initTestigosModule() {
+      tryLoadTestigos(0);
+    }
+
+    function setupTestigos() {
+      populateTestigosFilters();
+      renderTestigosTable();
+      if (rawTestigos.length > 0) showTestigo(rawTestigos[0]);
+    }
+
+    function populateTestigosFilters() {
+      const anoSel = document.getElementById('t-ano-filter');
+      const qSel = document.getElementById('t-q-filter');
+      const medioSel = document.getElementById('t-medio-filter');
+      const marcaSel = document.getElementById('t-marca-filter');
+
+      anoSel.innerHTML = '<option value="">Todos los Años</option>';
+      qSel.innerHTML = '<option value="">Todos los Q</option>';
+      medioSel.innerHTML = '<option value="">Todos los Medios</option>';
+      marcaSel.innerHTML = '<option value="">Todas las Marcas</option>';
+
+      const anos = [...new Set(rawTestigos.map(d => d["Año"]).filter(Boolean))].sort();
+      const qs = [...new Set(rawTestigos.map(d => d["Q"]).filter(Boolean))].sort();
+      const medios = [...new Set(rawTestigos.map(d => d["Medio Ok"]).filter(Boolean))].sort();
+      const marcas = [...new Set(rawTestigos.map(d => d["Marcas"]).filter(Boolean))].sort();
+
+      anos.forEach(a => anoSel.innerHTML += `<option value="${a}">${a}</option>`);
+      qs.forEach(q => qSel.innerHTML += `<option value="${q}">${q}</option>`);
+      medios.forEach(m => medioSel.innerHTML += `<option value="${m}">${m}</option>`);
+      marcas.forEach(m => marcaSel.innerHTML += `<option value="${m}">${m}</option>`);
+    }
+
+    function getBadgeClassTestigo(medio) {
+      const m = (medio || "").toLowerCase();
+      if (m.includes("video") || m.includes("otv") || m.includes("tv")) return "badge-video";
+      if (m.includes("radio") || m.includes("audio")) return "badge-audio";
+      if (m.includes("revista") || m.includes("impreso")) return "badge-revista";
+      return "badge-default";
+    }
+
+    function renderTestigosTable() {
+      const selAno = document.getElementById('t-ano-filter').value;
+      const selQ = document.getElementById('t-q-filter').value;
+      const selMedio = document.getElementById('t-medio-filter').value;
+      const selMarca = document.getElementById('t-marca-filter').value;
+
+      const filtered = rawTestigos.filter(row => {
+        const matchAno = !selAno || row["Año"] === selAno;
+        const matchQ = !selQ || row["Q"] === selQ;
+        const matchMedio = !selMedio || row["Medio Ok"] === selMedio;
+        const matchMarca = !selMarca || row["Marcas"] === selMarca;
+        return matchAno && matchQ && matchMedio && matchMarca;
+      });
+
+      document.getElementById('t-counter').textContent = `${filtered.length} de ${rawTestigos.length} Testigos`;
+      const tbody = document.getElementById('testigos-table-body');
+      tbody.innerHTML = "";
+
+      filtered.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row["Año"]}</td>
+          <td><strong>${row["Q"]}</strong></td>
+          <td><span class="badge-t ${getBadgeClassTestigo(row["Medio Ok"])}">${row["Medio Ok"]}</span></td>
+          <td><strong>${row["Marcas"]}</strong></td>
+          <td>${row["Producto"]}</td>
+          <td>${row["Canal"]}</td>
+          <td>${row["Duración"]}s</td>
+        `;
+
+        tr.addEventListener("click", () => {
+          document.querySelectorAll("#testigos-table-body tr").forEach(r => r.classList.remove("active"));
+          tr.classList.add("active");
+          showTestigo(row);
+        });
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function showTestigo(row) {
+      const title = document.getElementById('t-viewer-title');
+      const details = document.getElementById('t-viewer-details');
+      const viewer = document.getElementById('t-viewer-body');
+
+      title.textContent = `${row["Marcas"]} - ${row["Producto"]}`;
+      details.textContent = `${row["Medio Ok"]} | Canal: ${row["Canal"]} | Duración: ${row["Duración"]}s | ${row["Año"]} ${row["Q"]}`;
+
+      const url = row["Testigo"] || "";
+      const urlLower = url.toLowerCase();
+      viewer.innerHTML = "";
+
+      if (!url) {
+        viewer.innerHTML = '<div class="testigos-placeholder">Enlace no disponible</div>';
+        return;
+      }
+
+      if (urlLower.includes("matype=video")) {
+        const video = document.createElement("video");
+        video.src = url;
+        video.controls = true;
+        video.autoplay = true;
+        viewer.appendChild(video);
+      } else if (urlLower.includes("matype=audio")) {
+        const audio = document.createElement("audio");
+        audio.src = url;
+        audio.controls = true;
+        audio.autoplay = true;
+        viewer.appendChild(audio);
+      } else if (urlLower.includes("printedsourceshandler") || urlLower.match(/\.(jpeg|jpg|png|gif)$/)) {
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "Testigo Impreso";
+        viewer.appendChild(img);
+      } else {
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        viewer.appendChild(iframe);
+      }
+    }
+
+    window.addEventListener('load', () => {
+      cargarBaseDesdeGitHub();
+      initTestigosModule();
+      setupTreemapInteractions();
+
+      const btnTabLandscape = document.getElementById('tab-btn-landscape');
+      const btnTabTestigos = document.getElementById('tab-btn-testigos');
+      const btnTabResumen = document.getElementById('tab-btn-resumen');
+
+      const contentLandscape = document.getElementById('tab-content-landscape');
+      const contentTestigos = document.getElementById('tab-content-testigos');
+      const contentResumen = document.getElementById('tab-content-resumen');
+
+      const dashTitle = document.getElementById('main-dash-title');
+      const dashSubtitle = document.getElementById('main-dash-subtitle');
+
+      function switchTab(activeBtn, activeContent, title, subtitle) {
+        [btnTabLandscape, btnTabTestigos, btnTabResumen].forEach(b => b.classList.remove('active'));
+        [contentLandscape, contentTestigos, contentResumen].forEach(c => c.classList.remove('active'));
+
+        activeBtn.classList.add('active');
+        activeContent.classList.add('active');
+        dashTitle.textContent = title;
+        dashSubtitle.textContent = subtitle;
+
+        if (activeBtn === btnTabLandscape) {
+          setTimeout(() => applyFilters(), 50);
+        }
+      }
+
+      btnTabLandscape.addEventListener('click', () => {
+        switchTab(btnTabLandscape, contentLandscape, "Competitive Landscape", "Análisis de Inversión Publicitaria por Marcas y Medios");
+      });
+
+      btnTabTestigos.addEventListener('click', () => {
+        switchTab(btnTabTestigos, contentTestigos, "Testigos", "Monitoreo y Reproducción Multimedia de Pauta Auditsa");
+      });
+
+      btnTabResumen.addEventListener('click', () => {
+        switchTab(btnTabResumen, contentResumen, "Resumen Detallado", "Inversión por Marca y Quarter (Q1, Q2, Q3 2026)");
+      });
+
+      document.getElementById('quarter-filter').addEventListener('change', applyFilters);
+      document.getElementById('classification-filter').addEventListener('change', applyFilters);
+      document.getElementById('macro-media-filter').addEventListener('change', applyFilters);
+      document.getElementById('media-type-filter').addEventListener('change', applyFilters);
+      document.getElementById('competitor-filter').addEventListener('change', applyFilters);
+      document.getElementById('type-media-filter').addEventListener('change', applyFilters);
+      document.getElementById('broadcast-medium-selector').addEventListener('change', applyFilters);
+
+      document.getElementById('treemap-brand-filter').addEventListener('change', () => {
+        applyFilters();
+      });
+
+      const btnMundial = document.getElementById('btn-mundial-filter');
+      btnMundial.addEventListener('click', () => {
+        filterMundialActive = !filterMundialActive;
+        btnMundial.classList.toggle('active', filterMundialActive);
+        applyFilters();
+      });
+
+      const btnReset = document.getElementById('btn-reset-filters');
+      btnReset.addEventListener('click', resetAllFilters);
+
+      const btnBrands = document.getElementById('btn-trend-brands');
+      const btnTotal = document.getElementById('btn-trend-total');
+
+      btnBrands.addEventListener('click', () => {
+        trendViewMode = 'BRANDS';
+        btnBrands.classList.add('active');
+        btnTotal.classList.remove('active');
+        applyFilters();
+      });
+
+      btnTotal.addEventListener('click', () => {
+        trendViewMode = 'TOTAL';
+        btnTotal.classList.add('active');
+        btnBrands.classList.remove('active');
+        applyFilters();
+      });
+
+      const btnMediaAbs = document.getElementById('btn-mediamix-abs');
+      const btnMediaPct = document.getElementById('btn-mediamix-pct');
+
+      btnMediaAbs.addEventListener('click', () => {
+        mediaMixViewMode = 'ABS';
+        btnMediaAbs.classList.add('active');
+        btnMediaPct.classList.remove('active');
+        applyFilters();
+      });
+
+      btnMediaPct.addEventListener('click', () => {
+        mediaMixViewMode = 'PCT';
+        btnMediaPct.classList.add('active');
+        btnMediaAbs.classList.remove('active');
+        applyFilters();
+      });
+
+      document.getElementById('t-ano-filter').addEventListener('change', renderTestigosTable);
+      document.getElementById('t-q-filter').addEventListener('change', renderTestigosTable);
+      document.getElementById('t-medio-filter').addEventListener('change', renderTestigosTable);
+      document.getElementById('t-marca-filter').addEventListener('change', renderTestigosTable);
+
+      document.getElementById('btn-reset-testigos').addEventListener('click', () => {
+        document.getElementById('t-ano-filter').value = "";
+        document.getElementById('t-q-filter').value = "";
+        document.getElementById('t-medio-filter').value = "";
+        document.getElementById('t-marca-filter').value = "";
+        renderTestigosTable();
+      });
+
+      window.addEventListener('resize', () => {
+        if (contentLandscape.classList.contains('active')) {
+          applyFilters();
+        }
+      });
     });
-
-    loadData();
   </script>
 
 </body></html>
