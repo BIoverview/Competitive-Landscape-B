@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="13" width="1240" height="920"><head>
+<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="18" width="1240" height="920"><head>
   <meta charset="UTF-8">
   <title>Competitive Landscape &amp; Testigos 2026</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -932,12 +932,13 @@
         <p id="media-type-insights-text">Cargando análisis táctico integral...</p>
       </div>
 
+      <!-- FILA 3: MIX DE MEDIOS POR MARCA (TOP 12 MARCAS CON SCOTIABANK GARANTIZADO) -->
       <div class="charts-grid">
         <div class="chart-panel" style="grid-column: span 2;">
           <div class="panel-header">
             <div class="panel-header-titles">
               <h2>Mix de Inversión por Medio y Competidor</h2>
-              <p>Desglose de medios con % de participación (Share of Media) de cada marca</p>
+              <p>Desglose de medios con % de participación (Share of Media) de las principales marcas del mercado</p>
             </div>
             <div class="panel-header-controls">
               <div class="trend-toggle-group">
@@ -946,7 +947,7 @@
               </div>
             </div>
           </div>
-          <div class="chart-wrapper" style="height: 320px;">
+          <div class="chart-wrapper" style="height: 330px;">
             <canvas id="mediaMixChart"></canvas>
           </div>
         </div>
@@ -1019,7 +1020,7 @@
       </div>
     </div>
 
-    <!-- PESTAÑA 2: TESTIGOS AUDITSA -->
+    <!-- PESTAÑA 2: TESTIGOS AUDITSA (CON BOTÓN MUNDIAL DINÁMICO) -->
     <div class="tab-content" id="tab-content-testigos">
       <div class="testigos-wrapper">
         <div class="testigos-filters-card">
@@ -1051,6 +1052,7 @@
             </select>
           </div>
 
+          <!-- BOTÓN MUNDIAL EN TESTIGOS -->
           <div class="mundial-btn-container">
             <label>Filtro Especial</label>
             <button type="button" class="mundial-toggle-btn" id="btn-t-mundial-filter">
@@ -1106,7 +1108,7 @@
       <div class="table-panel">
         <div class="panel-header">
           <div class="panel-header-titles">
-            <h3>Resumen Detallado por Marca y Quarter (Q1, Q2, Q3 2026)</h3>
+            <h3 id="table-summary-title">Resumen Detallado por Marca y Quarter (Q1, Q2, Q3 2026)</h3>
             <p id="table-summary-subtitle">Cifras en millones de pesos ($M MXN)</p>
           </div>
         </div>
@@ -1163,23 +1165,71 @@
       return val.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
     }
 
-    // FUNCIÓN PARA DECODIFICAR CSV BINARIO CON SOPORTE AUTOMÁTICO PARA ANSI / WINDOWS-1252 / UTF-8
+    // DESCARGA BINARIA CONVERTIENDO AUTOMÁTICAMENTE DE EXCEL WINDOWS-1252 A UTF-8
     async function fetchCsvWithEncoding(url) {
       const response = await fetch(url);
       if (!response.ok) throw new Error("No se pudo descargar el archivo: " + url);
       const buffer = await response.arrayBuffer();
 
-      // Probar primero decodificación UTF-8
-      const utf8Decoder = new TextDecoder('utf-8', { fatal: false });
-      let text = utf8Decoder.decode(buffer);
-
-      // Si aparecen caracteres de reemplazo (), decodificar en windows-1252 (formato nativo de Excel en español)
-      if (text.includes('')) {
+      try {
+        const utf8Strict = new TextDecoder('utf-8', { fatal: true });
+        return utf8Strict.decode(buffer);
+      } catch (e) {
         const winDecoder = new TextDecoder('windows-1252');
-        text = winDecoder.decode(buffer);
+        return winDecoder.decode(buffer);
       }
+    }
 
-      return text;
+    // SANITIZACIÓN ROBUSTA DE CARACTERES EN ESPAÑOL
+    function cleanSpanishText(str) {
+      if (!str) return '';
+      let s = String(str);
+
+      const smartDictionary = [
+        [/\bPgina\b/gi, 'Página'],
+        [/\bP[\?]?gina\b/gi, 'Página'],
+        [/\bCrdito\b/gi, 'Crédito'],
+        [/\bCr[\?]?dito\b/gi, 'Crédito'],
+        [/\bCrditos\b/gi, 'Créditos'],
+        [/\bCr[\?]?ditos\b/gi, 'Créditos'],
+        [/\bPrstamo\b/gi, 'Préstamo'],
+        [/\bPr[\?]?stamo\b/gi, 'Préstamo'],
+        [/\bPrstamos\b/gi, 'Préstamos'],
+        [/\bPr[\?]?stamos\b/gi, 'Préstamos'],
+        [/\bAplicacin\b/gi, 'Aplicación'],
+        [/\bAplicaci[\?]?n\b/gi, 'Aplicación'],
+        [/\bFrmula\b/gi, 'Fórmula'],
+        [/\bF[\?]?rmula\b/gi, 'Fórmula'],
+        [/\bMxico\b/gi, 'México'],
+        [/\bM[\?]?xico\b/gi, 'México'],
+        [/\bNmina\b/gi, 'Nómina'],
+        [/\bN[\?]?mina\b/gi, 'Nómina'],
+        [/\bLnea\b/gi, 'Línea'],
+        [/\bL[\?]?nea\b/gi, 'Línea'],
+        [/\bTelfono\b/gi, 'Teléfono'],
+        [/\bTel[\?]?fono\b/gi, 'Teléfono'],
+        [/\bInversin\b/gi, 'Inversión'],
+        [/\bInversi[\?]?n\b/gi, 'Inversión'],
+        [/\bTelevisin\b/gi, 'Televisión'],
+        [/\bTelevisi[\?]?n\b/gi, 'Televisión'],
+        [/\bPromocin\b/gi, 'Promoción'],
+        [/\bPromoci[\?]?n\b/gi, 'Promoción'],
+        [/\bEdicin\b/gi, 'Edición'],
+        [/\bEdici[\?]?n\b/gi, 'Edición'],
+        [/\bAtencin\b/gi, 'Atención'],
+        [/\bAtenci[\?]?n\b/gi, 'Atención'],
+        [/\bAo\b/gi, 'Año'],
+        [/\bA[\?]?o\b/gi, 'Año'],
+        [/\bAos\b/gi, 'Años'],
+        [/\bA[\?]?os\b/gi, 'Años']
+      ];
+
+      smartDictionary.forEach(([badPattern, goodWord]) => {
+        s = s.replace(badPattern, goodWord);
+      });
+
+      s = s.replace(/[\uFFFD]/g, '');
+      return s.trim();
     }
 
     const insideDoughnutPercentPlugin = {
@@ -1388,7 +1438,7 @@
     function extractBroadcastChannelName(row, medio, desc) {
       const explicitCol = findColumnValue(row, /^canal$|^canal.*especifico|^vehiculo|^soporte|^emisora|^estacion|^cadena|^programa|^plaza/);
       if (explicitCol && String(explicitCol).trim().length > 1) {
-        return String(explicitCol).trim();
+        return cleanSpanishText(explicitCol);
       }
 
       const mUpper = (medio || '').toUpperCase();
@@ -1449,18 +1499,24 @@
               let totalMundialRecords = 0;
 
               results.data.forEach(row => {
-                const marca = String(findColumnValue(row, /^marcas$/) || findColumnValue(row, /^marca$/) || '').trim();
+                const marca = cleanSpanishText(findColumnValue(row, /^marcas$/) || findColumnValue(row, /^marca$/) || '');
                 if (!marca) return;
 
                 const invM = parseMoneyToMillions(findColumnValue(row, /inver/));
-                const clasif = String(findColumnValue(row, /clasifi/) || 'Banca Tradicional').trim();
-                const medio = String(findColumnValue(row, /^medio$/) || 'Otros').trim();
+                const clasif = cleanSpanishText(findColumnValue(row, /clasifi/) || 'Banca Tradicional');
+
+                const medioRaw = String(
+                  findColumnValue(row, /^medio.*ok$|^medio$|^medios$|^tipo.*medio/) || 
+                  'Otros'
+                ).trim();
+                const medio = cleanSpanishText(medioRaw !== '' ? medioRaw : 'Otros');
+
                 const tipoMedio = String(findColumnValue(row, /tipo.*medio/) || (medio.toLowerCase().includes('digital') ? 'ON' : 'OFF')).trim().toUpperCase();
                 const mesRaw = String(findColumnValue(row, /^mes/) || '').trim().toLowerCase();
                 const qRaw = String(findColumnValue(row, /^q$/) || findColumnValue(row, /trimestre|quarter/) || '').trim().toUpperCase();
-                const typeRaw = String(findColumnValue(row, /^type$/) || findColumnValue(row, /tipo.*formato|formato/) || 'Otros').trim();
-                const descRaw = String(findColumnValue(row, /^descrip/) || '').trim();
-                const prodRaw = String(findColumnValue(row, /^producto$/) || findColumnValue(row, /^prod$/) || 'Institucional').trim();
+                const typeRaw = cleanSpanishText(findColumnValue(row, /^type$/) || findColumnValue(row, /tipo.*formato|formato/) || 'Otros');
+                const descRaw = cleanSpanishText(findColumnValue(row, /^descrip/) || '');
+                const prodRaw = cleanSpanishText(findColumnValue(row, /^producto$/) || findColumnValue(row, /^prod$/) || 'Institucional');
 
                 const descNorm = descRaw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 const isMundial = descNorm.includes('fifa') || descNorm.includes('mundial') || descNorm.includes('world cup') || descNorm.includes('copa');
@@ -1472,7 +1528,7 @@
                 rawRecords.push({
                   brand: marca,
                   clasif: clasif || 'Banca Tradicional',
-                  medio: medio || 'Otros',
+                  medio: medio,
                   tipoMedio: tipoMedio.includes('ON') ? 'ON' : 'OFF',
                   type: typeRaw || 'Otros',
                   producto: prodRaw || 'General',
@@ -2349,20 +2405,29 @@
       }
     }
 
+    // GRÁFICO MEDIA MIX: AMPLIADO A TOP 12 CON INCLUSIÓN GARANTIZADA DE SCOTIABANK
     function renderMediaMixChart(brands) {
       const ctx = document.getElementById('mediaMixChart').getContext('2d');
-      const top8 = brands.slice(0, 8);
+      
+      // Tomar las primeras 12 marcas
+      let selectedBrands = brands.slice(0, 12);
+      
+      // Garantizar que Scotiabank (Cliente) siempre esté presente
+      const clientBrand = brands.find(b => b.isClient || b.brand.toLowerCase().includes('scotiabank'));
+      if (clientBrand && !selectedBrands.some(b => b.isClient || b.brand.toLowerCase().includes('scotiabank'))) {
+        selectedBrands.push(clientBrand);
+      }
 
       const allMedios = new Set();
-      top8.forEach(b => Object.keys(b.mediaMix).forEach(m => allMedios.add(m)));
+      selectedBrands.forEach(b => Object.keys(b.mediaMix).forEach(m => allMedios.add(m)));
       const categories = [...allMedios];
-      const colors = ['#ec111a', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#ec4899', '#06b6d4', '#94a3b8', '#64748b'];
+      const colors = ['#ec111a', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#ec4899', '#06b6d4', '#94a3b8', '#64748b', '#475569'];
 
       const datasets = categories.map((cat, idx) => {
-        const rawData = top8.map(b => b.mediaMix[cat] || 0);
+        const rawData = selectedBrands.map(b => b.mediaMix[cat] || 0);
         const processedData = rawData.map((val, bIdx) => {
           if (mediaMixViewMode === 'PCT') {
-            const bTotal = top8[bIdx].total;
+            const bTotal = selectedBrands[bIdx].total;
             return bTotal > 0 ? (val / bTotal) * 100 : 0;
           }
           return val;
@@ -2381,7 +2446,7 @@
       mediaMixChartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: top8.map(b => b.brand),
+          labels: selectedBrands.map(b => b.brand),
           datasets: datasets
         },
         plugins: [insideStackedMediaPercentPlugin],
@@ -2390,7 +2455,11 @@
           maintainAspectRatio: false,
           interaction: { mode: 'nearest', intersect: true },
           scales: {
-            x: { stacked: true, grid: { display: false } },
+            x: { 
+              stacked: true, 
+              grid: { display: false },
+              ticks: { font: { size: 10.5, weight: '600' }, maxRotation: 20, minRotation: 0 }
+            },
             y: {
               stacked: true,
               beginAtZero: true,
@@ -2408,10 +2477,10 @@
                 label: function(ctx) {
                   const ds = ctx.dataset;
                   const bIdx = ctx.dataIndex;
-                  const bTotal = top8[bIdx].total;
+                  const bTotal = selectedBrands[bIdx].total;
                   const valDollar = ds.rawDollars ? ds.rawDollars[bIdx] : ctx.raw;
                   const shareBrand = bTotal > 0 ? ((valDollar / bTotal) * 100).toFixed(1) : '0';
-                  return ` ${ds.label}: $${formatMillions(valDollar)}M (${shareBrand}% de la pauta de ${top8[bIdx].brand})`;
+                  return ` ${ds.label}: $${formatMillions(valDollar)}M (${shareBrand}% de la pauta de ${selectedBrands[bIdx].brand})`;
                 }
               }
             }
@@ -2584,7 +2653,7 @@
       });
     }
 
-    async function tryLoadTestigos(urlIndex) {
+    async function tryLoadTestigos(urlIndex = 0) {
       if (urlIndex >= TESTIGOS_URLS.length) {
         console.warn("No se pudo cargar el archivo remoto de testigos, usando muestra local.");
         setupTestigos();
@@ -2596,7 +2665,6 @@
       if (counterEl) counterEl.textContent = "Conectando a base de testigos...";
 
       try {
-        // Cargar con decodificador que corrige tildes y caracteres Windows-1252
         const csvText = await fetchCsvWithEncoding(targetUrl);
 
         Papa.parse(csvText, {
@@ -2611,22 +2679,14 @@
             rawTestigos = results.data.filter(row => {
               return (row["Marcas"] || row["Testigo"] || row["Medio Ok"] || row["Medio"] || row["Marca"]);
             }).map(row => {
-              const desc = String(
-                findColumnValue(row, /^descrip/) || 
-                row["Descripción"] || 
-                row["Descripcion"] || 
-                row["desc"] || 
-                row["Desc"] || 
-                ""
-              ).trim();
-
+              const desc = cleanSpanishText(findColumnValue(row, /^descrip/) || row["Descripción"] || row["Descripcion"] || row["desc"] || row["Desc"] || "");
               const descNorm = desc.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
               const isMundial = /\b(mundial|fifa|copa)\b/i.test(descNorm);
 
-              const medio = (row["Medio Ok"] || row["Medio"] || "Otros").trim();
+              const medio = cleanSpanishText(row["Medio Ok"] || row["Medio"] || "Otros");
               const mLower = medio.toLowerCase();
 
-              const esMedioAudiovisual = (
+              const esAudiovisual = (
                 mLower === 'otv' || 
                 mLower === 'ltv' || 
                 mLower === 'ptv' || 
@@ -2638,19 +2698,23 @@
               );
 
               let duracionStr = "NA";
-              if (esMedioAudiovisual) {
+              if (esAudiovisual) {
                 const durRaw = findColumnValue(row, /^duraci[oó]n|^duracion|^segundos|^dur/);
                 let parsedDur = parseInt(durRaw, 10);
                 duracionStr = !isNaN(parsedDur) ? `${parsedDur}s` : "0s";
               }
 
+              const marca = cleanSpanishText(row["Marcas"] || row["Marca"] || "");
+              const producto = cleanSpanishText(row["Producto"] || row["Modelo"] || "");
+              const canal = cleanSpanishText(row["Canal"] || "");
+
               return {
                 "Año": row["Año"] || row["Ano"] || "2026",
                 "Q": row["Q"] || "Q1",
                 "Medio Ok": medio,
-                "Marcas": row["Marcas"] || row["Marca"] || "",
-                "Producto": row["Producto"] || "",
-                "Canal": row["Canal"] || "",
+                "Marcas": marca,
+                "Producto": producto,
+                "Canal": canal,
                 "Duración": duracionStr,
                 "Testigo": row["Testigo"] || row["URL"] || row["Enlace"] || "",
                 "Desc": desc,
