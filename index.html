@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="18" width="1240" height="920"><head>
+<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="20" width="1240" height="920"><head>
   <meta charset="UTF-8">
   <title>Competitive Landscape &amp; Testigos 2026</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,6 +15,138 @@
       background-color: #ffffff;
       color: #1e293b;
       padding: 20px 24px;
+    }
+
+    /* PANTALLA DE ACCESO RESTRINGIDO */
+    #auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #23080c 0%, #0c0305 100%);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .auth-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 24px;
+      padding: 40px 36px 32px 36px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .auth-icon-circle {
+      width: 64px;
+      height: 64px;
+      background: #ffe4e6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+    }
+
+    .auth-card h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+    }
+
+    .auth-card p.auth-sub {
+      font-size: 13.5px;
+      color: #64748b;
+      margin-top: 5px;
+      margin-bottom: 26px;
+    }
+
+    .auth-form-group {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    .auth-form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    .auth-input {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      border: 1.5px solid #f43f5e;
+      border-radius: 10px;
+      font-size: 18px;
+      letter-spacing: 4px;
+      text-align: center;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12);
+    }
+
+    .auth-input:focus {
+      border-color: #e11d48;
+      box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.22);
+    }
+
+    .auth-input.error {
+      border-color: #dc2626;
+      background-color: #fef2f2;
+      animation: shakeAuth 0.35s ease;
+    }
+
+    @keyframes shakeAuth {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-7px); }
+      40%, 80% { transform: translateX(7px); }
+    }
+
+    .auth-btn {
+      width: 100%;
+      height: 48px;
+      background: #e11d48;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+    }
+
+    .auth-btn:hover {
+      background: #be123c;
+    }
+
+    .auth-btn:active {
+      transform: scale(0.99);
+    }
+
+    .auth-error-msg {
+      font-size: 12px;
+      font-weight: 600;
+      color: #dc2626;
+      margin-top: 10px;
+      min-height: 16px;
+    }
+
+    .auth-footer {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-top: 24px;
     }
 
     .dashboard-container {
@@ -730,6 +862,35 @@
 </head>
 <body>
 
+  <!-- MODAL / PANTALLA DE ACCESO RESTRINGIDO -->
+  <div id="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-icon-circle">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2 id="auth-card-title">Acceso Restringido</h2>
+      <p class="auth-sub" id="auth-card-sub">Dashboard de Inversión y Testigos</p>
+
+      <div class="auth-form-group">
+        <label for="auth-password-input">CONTRASEÑA DE ACCESO</label>
+        <input type="password" id="auth-password-input" class="auth-input" placeholder="••••" autofocus="" autocomplete="current-password">
+      </div>
+
+      <button type="button" class="auth-btn" id="auth-submit-btn">
+        Ingresar al Dashboard
+      </button>
+
+      <div class="auth-error-msg" id="auth-error-msg"></div>
+
+      <p class="auth-footer" id="auth-footer-text">
+        Información confidencial para uso exclusivo y autorizado.
+      </p>
+    </div>
+  </div>
+
   <div class="dashboard-container">
     <!-- Header General -->
     <div class="header">
@@ -1159,6 +1320,41 @@
     let filterTMundialActive = false;
 
     let computedTreemapBoxes = [];
+
+    // GESTIÓN DE AUTENTICACIÓN / CONTRASEÑA
+    function setupAuthGate() {
+      const overlay = document.getElementById('auth-overlay');
+      const passInput = document.getElementById('auth-password-input');
+      const submitBtn = document.getElementById('auth-submit-btn');
+      const errorMsg = document.getElementById('auth-error-msg');
+      const correctPass = "1996";
+
+      function attemptLogin() {
+        const entered = passInput.value.trim();
+        if (entered === correctPass) {
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 300);
+        } else {
+          passInput.classList.add('error');
+          errorMsg.textContent = "Contraseña incorrecta. Intente de nuevo.";
+          passInput.value = "";
+          passInput.focus();
+          setTimeout(() => {
+            passInput.classList.remove('error');
+          }, 600);
+        }
+      }
+
+      submitBtn.addEventListener('click', attemptLogin);
+
+      passInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          attemptLogin();
+        }
+      });
+    }
 
     function formatMillions(val) {
       if (typeof val !== 'number' || isNaN(val)) return '0.0';
@@ -1917,70 +2113,66 @@
       renderNativeTreemap(filtered);
     }
 
-    function squarifyLayout(data, x, y, width, height) {
-      if (!data || data.length === 0 || width <= 0 || height <= 0) return [];
-      const items = data.filter(d => d.value > 0).sort((a, b) => b.value - a.value);
-      if (items.length === 0) return [];
+    // ALGORITMO RECURSIVO DE PARTICIÓN BINARIA (BISECCIÓN DE TREEMAP)
+    // Garantiza cobertura del 100% del área rectangular, eliminando desajustes, huecos y deformaciones diagonales
+    function computeTreemapBoxes(items, rx, ry, rw, rh) {
+      if (!items || items.length === 0 || rw <= 0 || rh <= 0) return [];
+      const list = items.filter(d => d.value > 0).sort((a, b) => b.value - a.value);
+      if (list.length === 0) return [];
 
-      const totalVal = items.reduce((s, d) => s + d.value, 0);
-      const totalArea = width * height;
-      const areas = items.map(d => ({ ...d, _area: (d.value / totalVal) * totalArea }));
       const results = [];
 
-      const worstRatio = (row, w) => {
-        if (row.length === 0 || w <= 0) return Infinity;
-        let minA = Infinity, maxA = 0, sumA = 0;
-        for (let i = 0; i < row.length; i++) {
-          const a = row[i]._area;
-          if (a < minA) minA = a;
-          if (a > maxA) maxA = a;
-          sumA += a;
+      function subdivide(currentList, x, y, width, height) {
+        if (!currentList || currentList.length === 0 || width <= 0 || height <= 0) return;
+
+        if (currentList.length === 1) {
+          results.push({
+            ...currentList[0],
+            x: x,
+            y: y,
+            width: width,
+            height: height
+          });
+          return;
         }
-        const w2 = w * w;
-        const sum2 = sumA * sumA;
-        return Math.max((w2 * maxA) / sum2, sum2 / (w2 * minA));
-      };
 
-      const layoutRow = (row, rect) => {
-        const sumA = row.reduce((s, i) => s + i._area, 0);
-        if (rect.width >= rect.height) {
-          const rowW = sumA / rect.height;
-          let curY = rect.y;
-          for (let i = 0; i < row.length; i++) {
-            const itemH = row[i]._area / rowW;
-            results.push({ ...row[i], x: rect.x, y: curY, width: rowW, height: itemH });
-            curY += itemH;
+        const total = currentList.reduce((sum, item) => sum + item.value, 0);
+        if (total === 0) return;
+
+        const half = total / 2;
+        let running = 0;
+        let splitIdx = 0;
+        let bestDiff = Infinity;
+
+        for (let i = 0; i < currentList.length - 1; i++) {
+          running += currentList[i].value;
+          const diff = Math.abs(running - half);
+          if (diff < bestDiff) {
+            bestDiff = diff;
+            splitIdx = i;
           }
-          return { x: rect.x + rowW, y: rect.y, width: Math.max(0, rect.width - rowW), height: rect.height };
-        } else {
-          const rowH = sumA / rect.width;
-          let curX = rect.x;
-          for (let i = 0; i < row.length; i++) {
-            const itemW = row[i]._area / rowH;
-            results.push({ ...row[i], x: curX, y: rect.y, width: itemW, height: rowH });
-            curX += itemW;
-          }
-          return { x: rect.x, y: rect.y + rowH, width: rect.width, height: Math.max(0, rect.height - rowH) };
         }
-      };
 
-      let curRect = { x, y, width, height };
-      let curRow = [];
+        const listA = currentList.slice(0, splitIdx + 1);
+        const listB = currentList.slice(splitIdx + 1);
+        const sumA = listA.reduce((s, it) => s + it.value, 0);
 
-      for (let i = 0; i < areas.length; i++) {
-        const item = areas[i];
-        const w = Math.max(0, Math.min(curRect.width, curRect.height));
-        const ratioWith = worstRatio([...curRow, item], w);
-        const ratioWithout = worstRatio(curRow, w);
-
-        if (curRow.length === 0 || ratioWith <= ratioWithout) {
-          curRow.push(item);
+        if (width >= height) {
+          // División vertical en dos rectángulos balanceados
+          const wA = (sumA / total) * width;
+          const wB = width - wA;
+          subdivide(listA, x, y, wA, height);
+          subdivide(listB, x + wA, y, wB, height);
         } else {
-          curRect = layoutRow(curRow, curRect);
-          curRow = [item];
+          // División horizontal en dos rectángulos balanceados
+          const hA = (sumA / total) * height;
+          const hB = height - hA;
+          subdivide(listA, x, y, width, hA);
+          subdivide(listB, x, y + hA, width, hB);
         }
       }
-      if (curRow.length > 0) layoutRow(curRow, curRect);
+
+      subdivide(list, rx, ry, rw, rh);
       return results;
     }
 
@@ -2040,22 +2232,43 @@
         'BBVA': '#004481',
         'Azteca': '#10b981',
         'Santander': '#e11d48',
-        'Mercado Pago': '#0369a1',
-        'Nu': '#8b5cf6',
+        'Mercado Pago': '#009ee3',
+        'Nu': '#820ad1',
         'Banorte': '#ea580c',
         'BanCoppel': '#ca8a04',
         'Clip': '#f59e0b',
-        'Kueski': '#14b8a6'
+        'Kueski': '#14b8a6',
+        'HSBC': '#dc2626',
+        'Plata': '#4f46e5',
+        'American Express': '#006fcf',
+        'Falabella': '#16a34a',
+        'Afirme': '#0284c7',
+        'Inbursa': '#1e3a8a',
+        'Hey Banco': '#111827'
       };
-      const fallbackPalette = ['#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2', '#4f46e5', '#be123c'];
 
-      const boxes = squarifyLayout(items, 0, 0, w, h);
+      const fallbackPalette = ['#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2', '#4f46e5', '#be123c', '#059669', '#d946ef'];
+
+      function getBrandColor(brandName) {
+        if (!brandName) return '#64748b';
+        if (brandColorsMap[brandName]) return brandColorsMap[brandName];
+        for (const k in brandColorsMap) {
+          if (brandName.toLowerCase().includes(k.toLowerCase())) return brandColorsMap[k];
+        }
+        let hash = 0;
+        for (let i = 0; i < brandName.length; i++) {
+          hash = brandName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return fallbackPalette[Math.abs(hash) % fallbackPalette.length];
+      }
+
+      const boxes = computeTreemapBoxes(items, 0, 0, w, h);
       computedTreemapBoxes = boxes;
 
       ctx.clearRect(0, 0, w, h);
 
       boxes.forEach(box => {
-        const color = brandColorsMap[box.brand] || fallbackPalette[Math.abs(box.brand.length) % fallbackPalette.length];
+        const color = getBrandColor(box.brand);
         
         ctx.fillStyle = color;
         ctx.fillRect(box.x, box.y, box.width, box.height);
@@ -2063,24 +2276,31 @@
         ctx.lineWidth = 1.5;
         ctx.strokeRect(box.x, box.y, box.width, box.height);
 
-        if (box.width > 55 && box.height > 25) {
+        // Renderizado inteligente y sin desbordes de texto
+        if (box.width > 48 && box.height > 22) {
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'top';
 
-          ctx.font = 'bold 11px -apple-system, sans-serif';
+          ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
           const maxTextW = box.width - 12;
           
           let prodText = box.producto;
-          if (ctx.measureText(prodText).width > maxTextW) {
-            prodText = prodText.substring(0, Math.floor(maxTextW / 7)) + '...';
+          while (ctx.measureText(prodText).width > maxTextW && prodText.length > 3) {
+            prodText = prodText.slice(0, -1);
           }
+          if (prodText !== box.producto) prodText += '...';
           ctx.fillText(prodText, box.x + 6, box.y + 6);
 
-          if (box.height > 44 && selBrand === 'ALL') {
-            ctx.font = '500 10px -apple-system, sans-serif';
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-            ctx.fillText(box.brand, box.x + 6, box.y + 22);
+          if (box.height > 40 && selBrand === 'ALL' && box.width > 54) {
+            ctx.font = '500 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
+            let brandText = box.brand;
+            while (ctx.measureText(brandText).width > maxTextW && brandText.length > 3) {
+              brandText = brandText.slice(0, -1);
+            }
+            if (brandText !== box.brand) brandText += '...';
+            ctx.fillText(brandText, box.x + 6, box.y + 22);
           }
         }
       });
@@ -2103,8 +2323,8 @@
 
         if (hit) {
           tooltip.style.display = 'block';
-          tooltip.innerHTML = `Marca: ${hit.brand} &nbsp;|&nbsp; Producto: ${hit.producto}`;
-          tooltip.style.left = `${Math.min(mouseX + 14, rect.width - 220)}px`;
+          tooltip.innerHTML = `<strong>${hit.brand}</strong> &nbsp;|&nbsp; ${hit.producto} <span style="opacity: 0.75; font-size: 11px;">(${hit.value} menciones)</span>`;
+          tooltip.style.left = `${Math.min(mouseX + 14, rect.width - 240)}px`;
           tooltip.style.top = `${Math.max(mouseY - 32, 10)}px`;
         } else {
           tooltip.style.display = 'none';
@@ -2409,10 +2629,8 @@
     function renderMediaMixChart(brands) {
       const ctx = document.getElementById('mediaMixChart').getContext('2d');
       
-      // Tomar las primeras 12 marcas
       let selectedBrands = brands.slice(0, 12);
       
-      // Garantizar que Scotiabank (Cliente) siempre esté presente
       const clientBrand = brands.find(b => b.isClient || b.brand.toLowerCase().includes('scotiabank'));
       if (clientBrand && !selectedBrands.some(b => b.isClient || b.brand.toLowerCase().includes('scotiabank'))) {
         selectedBrands.push(clientBrand);
@@ -2857,6 +3075,7 @@
     }
 
     window.addEventListener('load', () => {
+      setupAuthGate();
       cargarBaseDesdeGitHub();
       initTestigosModule();
       setupTreemapInteractions();
