@@ -1,4 +1,4 @@
-<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="20" width="1240" height="920"><head>
+<html data-type="html" data-identifier="4c28f3bb-81ef-42d8-9dfb-d0ba759d57a2" data-title="Competitive Landscape &amp; Testigos 2026" data-version="22" width="1240" height="920"><head>
   <meta charset="UTF-8">
   <title>Competitive Landscape &amp; Testigos 2026</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -87,7 +87,7 @@
       border: 1.5px solid #f43f5e;
       border-radius: 10px;
       font-size: 18px;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
       text-align: center;
       color: #0f172a;
       outline: none;
@@ -188,6 +188,36 @@
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+
+    /* Botón Salir / Bloqueo */
+    .btn-logout {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      user-select: none;
+    }
+
+    .btn-logout:hover {
+      background-color: #fff1f2;
+      border-color: #fecdd3;
+      color: #e11d48;
+      box-shadow: 0 2px 4px rgba(225, 29, 72, 0.1);
+    }
+
+    .btn-logout .lock-emoji {
+      font-size: 13px;
+      line-height: 1;
     }
 
     .status-badge {
@@ -876,7 +906,7 @@
 
       <div class="auth-form-group">
         <label for="auth-password-input">CONTRASEÑA DE ACCESO</label>
-        <input type="password" id="auth-password-input" class="auth-input" placeholder="••••" autofocus="" autocomplete="current-password">
+        <input type="password" id="auth-password-input" class="auth-input" placeholder="••••••••" autofocus="" autocomplete="current-password">
       </div>
 
       <button type="button" class="auth-btn" id="auth-submit-btn">
@@ -901,6 +931,11 @@
         </div>
       </div>
       <div class="header-right">
+        <!-- BOTÓN SALIR / BLOQUEO -->
+        <button type="button" class="btn-logout" id="btn-logout">
+          <span class="lock-emoji">🔒</span>
+          <span>Salir</span>
+        </button>
         <div class="status-badge loading" id="sync-status-badge">
           <span class="sync-dot" id="sync-dot"></span>
           <span id="sync-status-text">Conectando...</span>
@@ -1327,7 +1362,8 @@
       const passInput = document.getElementById('auth-password-input');
       const submitBtn = document.getElementById('auth-submit-btn');
       const errorMsg = document.getElementById('auth-error-msg');
-      const correctPass = "1996";
+      const btnLogout = document.getElementById('btn-logout');
+      const correctPass = "ScotiaMx";
 
       function attemptLogin() {
         const entered = passInput.value.trim();
@@ -1347,6 +1383,16 @@
         }
       }
 
+      function lockDashboard() {
+        passInput.value = "";
+        errorMsg.textContent = "";
+        overlay.style.display = 'flex';
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+          passInput.focus();
+        }, 10);
+      }
+
       submitBtn.addEventListener('click', attemptLogin);
 
       passInput.addEventListener('keydown', (e) => {
@@ -1354,6 +1400,10 @@
           attemptLogin();
         }
       });
+
+      if (btnLogout) {
+        btnLogout.addEventListener('click', lockDashboard);
+      }
     }
 
     function formatMillions(val) {
@@ -2114,7 +2164,6 @@
     }
 
     // ALGORITMO RECURSIVO DE PARTICIÓN BINARIA (BISECCIÓN DE TREEMAP)
-    // Garantiza cobertura del 100% del área rectangular, eliminando desajustes, huecos y deformaciones diagonales
     function computeTreemapBoxes(items, rx, ry, rw, rh) {
       if (!items || items.length === 0 || rw <= 0 || rh <= 0) return [];
       const list = items.filter(d => d.value > 0).sort((a, b) => b.value - a.value);
@@ -2158,13 +2207,11 @@
         const sumA = listA.reduce((s, it) => s + it.value, 0);
 
         if (width >= height) {
-          // División vertical en dos rectángulos balanceados
           const wA = (sumA / total) * width;
           const wB = width - wA;
           subdivide(listA, x, y, wA, height);
           subdivide(listB, x + wA, y, wB, height);
         } else {
-          // División horizontal en dos rectángulos balanceados
           const hA = (sumA / total) * height;
           const hB = height - hA;
           subdivide(listA, x, y, width, hA);
@@ -2276,7 +2323,6 @@
         ctx.lineWidth = 1.5;
         ctx.strokeRect(box.x, box.y, box.width, box.height);
 
-        // Renderizado inteligente y sin desbordes de texto
         if (box.width > 48 && box.height > 22) {
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'left';
